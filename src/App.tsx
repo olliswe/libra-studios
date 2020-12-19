@@ -1,12 +1,9 @@
 import React from 'react';
+import ImageSlider from "./components/ImageSlider";
 
 
 const App = () => {
-  return (
-   <div>
-     Hello world
-   </div>
-  );
+  return <ImageSlider/>
 }
 
 export default App;
