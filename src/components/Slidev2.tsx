@@ -1,9 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef } from "react";
 import { useGesture } from "react-use-gesture";
 import { a, useSprings } from "react-spring";
-import { useHistory, useRouteMatch } from "react-router";
-import { clamp } from "lodash-es";
-import { act } from "react-dom/test-utils";
 
 // Mask image is really important if we decide our carousel shouldn't span the whole window
 const styles = {
@@ -23,20 +20,21 @@ interface ICarousel {
   style?: any;
   children: any;
   sensitivity?: number;
+  active: number;
+  setActive: (active: number) => void;
 }
 
 const Carousel = ({
-  initialOffset,
   items,
   itemWidth = "full" as "full",
   visible = 1,
   style,
   children,
   sensitivity = 1,
-}: ICarousel & { initialOffset: number }) => {
+  setActive,
+}: ICarousel) => {
   const windowWidth = itemWidth === "full" ? window.innerWidth : itemWidth;
   let width = itemWidth === "full" ? windowWidth : itemWidth;
-  const history = useHistory();
 
   const idx = useCallback((x, l = items.length) => (x < 0 ? x + l : x) % l, [
     items,
@@ -52,7 +50,6 @@ const Carousel = ({
   }));
   const prev = useRef([0, 1]);
   const index = useRef(0);
-  const [active, setActive] = useState(0);
   const runSprings = useCallback(
     (y, vy, down, xDir, cancel, distance, xMove) => {
       // This decides if we move over to the next slide or back to the initial
@@ -105,8 +102,7 @@ const Carousel = ({
       items.length,
       offset,
       sensitivity,
-      history,
-      initialOffset,
+      setActive,
     ]
   );
 
@@ -124,10 +120,6 @@ const Carousel = ({
     },
   });
 
-  useEffect(() => {
-    history.push((active + initialOffset).toString());
-  }, [active]);
-
   return (
     <div {...bind()} style={{ ...style, ...styles.container, width }}>
       {springs.map(({ x }, i) => (
@@ -142,31 +134,4 @@ const Carousel = ({
   );
 };
 
-const Hoc = (props: ICarousel) => {
-  const match = useRouteMatch<{ id: string }>("/:id");
-  const index = match?.params?.id;
-  const [initialOffset, setInitialOffset] = useState<number | undefined>();
-  const [parsedItems, setParsedItems] = useState<any[] | undefined>();
-
-  useEffect(() => {
-    if (parsedItems || !index || initialOffset) {
-      return;
-    }
-    const arrayCopy = props.items.slice();
-    const offsetItems = arrayCopy.splice(0, parseInt(index));
-    setInitialOffset(parseInt(index));
-    const newItems = [...arrayCopy, ...offsetItems];
-
-    setParsedItems(newItems);
-  }, [index, props.items, parsedItems, initialOffset]);
-
-  if (!parsedItems || !initialOffset) {
-    return <div style={{ color: "white" }}>hiiiii</div>;
-  }
-
-  return (
-    <Carousel {...props} items={parsedItems} initialOffset={initialOffset} />
-  );
-};
-
-export default Hoc;
+export default Carousel;

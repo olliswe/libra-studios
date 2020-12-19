@@ -1,6 +1,15 @@
+@font-face {
+  font-family: 'Bodoni';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bodoni'), url('assets/fonts/OPTIBodoni-Antiqua.otf') format('otf');
+}
+
+
 * {
   box-sizing: border-box;
 }
+
 
 html,
 body {
@@ -29,5 +38,5 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-  background: #171720;
+  background: #003333;
 }
