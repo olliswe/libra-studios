@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React from "react";
 import clamp from "lodash-es/clamp";
-import { useSprings, animated } from "react-spring";
+import { animated, useSprings } from "react-spring";
 import { useDrag } from "react-use-gesture";
 import styled from "styled-components";
 import AquiImg from "../assets/images/aqui.jpeg";
@@ -8,7 +8,7 @@ import CitaImg from "../assets/images/cita.jpg";
 import DetrasImg from "../assets/images/detras.jpg";
 import LaventanaImg from "../assets/images/laventana.jpg";
 import SolaImg from "../assets/images/sola.jpg";
-import { useHistory, useParams, useRouteMatch } from "react-router";
+import { useHistory, useRouteMatch } from "react-router";
 
 const pages = [AquiImg, CitaImg, DetrasImg, LaventanaImg, SolaImg];
 
@@ -43,9 +43,7 @@ const ImageSlider = ({ index }: { index: number }) => {
       if (active && distance > window.innerWidth / 3) {
         cancel(
           //@ts-ignore
-          history.push(
-            clamp(index + (xDir > 0 ? -1 : 1), 0, pages.length - 1).toString()
-          )
+          history.push(clamp(index + (xDir > 0 ? -1 : 1), 0, pages.length - 1))
         );
       }
       //@ts-ignore
