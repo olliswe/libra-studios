@@ -1,9 +1,13 @@
-import React from 'react';
+import React from "react";
 import ImageSlider from "./components/ImageSlider";
-
+import { BrowserRouter } from "react-router-dom";
 
 const App = () => {
-  return <ImageSlider/>
-}
+  return (
+    <BrowserRouter>
+      <ImageSlider />
+    </BrowserRouter>
+  );
+};
 
 export default App;

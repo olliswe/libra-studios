@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import clamp from "lodash-es/clamp";
 import { useSprings, animated } from "react-spring";
 import { useDrag } from "react-use-gesture";
@@ -8,6 +8,7 @@ import CitaImg from "../assets/images/cita.jpg";
 import DetrasImg from "../assets/images/detras.jpg";
 import LaventanaImg from "../assets/images/laventana.jpg";
 import SolaImg from "../assets/images/sola.jpg";
+import { useHistory, useParams, useRouteMatch } from "react-router";
 
 const pages = [AquiImg, CitaImg, DetrasImg, LaventanaImg, SolaImg];
 
@@ -30,11 +31,10 @@ const Image = styled(animated.div)`
     0 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
 `;
 
-const ImageSlider = () => {
-  const [index, setIndex] = useState(0);
+const ImageSlider = ({ index }: { index: number }) => {
+  const history = useHistory();
   const [props, set] = useSprings(pages.length, (i) => ({
     x: i * window.innerWidth,
-
     scale: 1,
     display: "block",
   }));
@@ -43,8 +43,8 @@ const ImageSlider = () => {
       if (active && distance > window.innerWidth / 3) {
         cancel(
           //@ts-ignore
-          setIndex((prev) =>
-            clamp(prev + (xDir > 0 ? -1 : 1), 0, pages.length - 1)
+          history.push(
+            clamp(index + (xDir > 0 ? -1 : 1), 0, pages.length - 1).toString()
           )
         );
       }
@@ -71,4 +71,15 @@ const ImageSlider = () => {
   );
 };
 
-export default ImageSlider;
+const Hoc = () => {
+  const match = useRouteMatch<{ id: string }>("/:id");
+  const index = match?.params?.id;
+
+  if (!index) {
+    return <div></div>;
+  }
+
+  return <ImageSlider index={parseInt(index)} />;
+};
+
+export default Hoc;
