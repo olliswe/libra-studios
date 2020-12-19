@@ -14,26 +14,31 @@ const items = [
     css: `url(${AquiImg})`,
     height: 150,
     name: "aqui",
+    label: "Aqui",
   },
   {
     css: `url(${CitaImg})`,
     height: 300,
     name: "cita",
+    label: "Cita",
   },
   {
     css: `url(${DetrasImg})`,
     height: 300,
     name: "detras",
+    label: "Detras",
   },
   {
     css: `url(${LaventanaImg})`,
     height: 300,
     name: "laventa",
+    label: "La Ventana",
   },
   {
     css: `url(${SolaImg})`,
     height: 300,
     name: "sola",
+    label: "Sola",
   },
 ];
 
@@ -57,11 +62,15 @@ const Image = styled(a.div)`
   background-repeat: no-repeat;
   box-shadow: 25px 25px 35px 5px #003333 inset,
     -25px -25px 35px 5px #003333 inset;
+  position: absolute;
 `;
 
 const Menu = styled.div`
   width: 100%;
   height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CarouselWrapper = styled.div<{ ml: number }>`
@@ -72,18 +81,26 @@ const CarouselWrapper = styled.div<{ ml: number }>`
 `;
 
 const NavBar = styled.div`
-  height: 60px;
+  height: 100px;
   width: 100%;
-  padding: 20px 10px 0 10px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
 `;
 
-const NavbarHeader = styled(H1)`
-  color: #ffbd66;
+const StyledH1 = styled(H1)`
+  color: ${({ theme }) => theme.colors.orange};
   font-size: 16px;
 `;
 
 const EmptyImage = styled.div`
   display: none;
+`;
+
+const CurrentSong = styled.span`
+  font-family: ${({ theme }) => theme.fonts.ProximaRegular};
+  color: ${({ theme }) => theme.colors.orange};
+  text-transform: uppercase;
 `;
 
 const SongsContainer = () => {
@@ -92,7 +109,7 @@ const SongsContainer = () => {
   return (
     <Main>
       <NavBar>
-        <NavbarHeader>LIBRA STUDIOS</NavbarHeader>
+        <StyledH1>LIBRA STUDIOS</StyledH1>
       </NavBar>
       <CarouselWrapper ml={window.innerWidth / 20}>
         <Carousel
@@ -103,12 +120,25 @@ const SongsContainer = () => {
         >
           {({ css }: { css: any }, i: number) => (
             <Content>
-              <Image style={{ backgroundImage: css }} />
+              <Image style={{ backgroundImage: css }}>
+                <StyledH1
+                  style={{
+                    position: "absolute",
+                    bottom: "20%",
+                    left: "10%",
+                    fontSize: "48px",
+                  }}
+                >
+                  {items[active].label}
+                </StyledH1>
+              </Image>
             </Content>
           )}
         </Carousel>
       </CarouselWrapper>
-      <Menu />
+      <Menu>
+        <CurrentSong>{items[active].label}</CurrentSong>
+      </Menu>
       {items.map((item) => (
         <EmptyImage style={{ backgroundImage: item.css }} />
       ))}
