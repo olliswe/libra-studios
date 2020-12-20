@@ -35,7 +35,7 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-  background: ${({ theme }) => theme.colors.darkgreen};
+  background: ${({ theme }) => theme.colors.orange};
 }
 
     `;

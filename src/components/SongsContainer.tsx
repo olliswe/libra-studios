@@ -45,9 +45,8 @@ const items = [
 
 const Main = styled.div`
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width:100vw;
+
 `;
 
 const Content = styled.div`
@@ -61,11 +60,8 @@ const Image = styled(a.div)`
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  box-shadow: 25px 25px 35px 5px #003333 inset,
-    -25px -25px 35px 5px #003333 inset;
-  position: absolute;
-  border: solid ${({ theme }) => theme.colors.darkgreen} 2px;
   cursor: url('https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png') 39 39, auto;
+  opacity: 0.7;
 
 `;
 
@@ -75,13 +71,13 @@ const Menu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom:0
 `;
 
-const CarouselWrapper = styled.div<{ ml: number }>`
-  overflow: hidden;
-  margin-left: ${({ ml }) => ml.toString() + "px"};
-  display: flex;
-  flex: 1;
+const CarouselWrapper = styled.div`
+ height:100%;
+ width:100%;
 `;
 
 const NavBar = styled.div`
@@ -90,6 +86,9 @@ const NavBar = styled.div`
   padding: 0 20px;
   display: flex;
   align-items: center;
+  position:absolute;
+  top:0;
+  z-index: 2;
 `;
 
 const StyledH1 = styled(H1)`
@@ -110,13 +109,23 @@ const CurrentSong = styled.span<{ isActive: boolean }>`
   cursor: pointer;
 `;
 
+const ImageOverlay = styled.div`
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overflow: auto;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.7); /*can be anything, of course*/
+`
+
 const SongsContainer = () => {
   const [active, setActive] = useState(0);
   const prev = useRef([0, 1]);
   const index = useRef(0);
 
   const { bind, debounceTransition, springs, width } = useSliderLogic({
-    itemWidth: window.innerWidth - window.innerWidth / 10,
+    itemWidth: "full",
     items,
     index,
     prev,
@@ -139,22 +148,23 @@ const SongsContainer = () => {
       <NavBar>
         <StyledH1>LIBRA STUDIOS</StyledH1>
       </NavBar>
-      <CarouselWrapper ml={window.innerWidth / 20}>
+      <CarouselWrapper>
         <Carousel items={items} bind={bind} width={width} springs={springs}>
           {({ css }: { css: any }, i: number) => (
             <Content>
-              <Image style={{ backgroundImage: css }}>
-                <StyledH1
+              <ImageOverlay>
+                <Image style={{ backgroundImage: css }}/>
+              </ImageOverlay>
+              <StyledH1
                   style={{
                     position: "absolute",
                     bottom: "20%",
                     left: "10%",
                     fontSize: "48px",
                   }}
-                >
-                  {items[active].label}
-                </StyledH1>
-              </Image>
+              >
+                {items[active].label}
+              </StyledH1>
             </Content>
           )}
         </Carousel>
