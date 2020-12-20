@@ -61,7 +61,8 @@ const Image = styled(a.div)`
   background-position: center center;
   background-repeat: no-repeat;
   cursor: url('https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png') 39 39, auto;
-  opacity: 0.7;
+  background-color: rgba(0,0,0,.3); // Tint color
+  background-blend-mode: multiply;
 
 `;
 
@@ -109,15 +110,6 @@ const CurrentSong = styled.span<{ isActive: boolean }>`
   cursor: pointer;
 `;
 
-const ImageOverlay = styled.div`
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    overflow: auto;
-    top: 0px;
-    left: 0px;
-    background: rgba(0, 0, 0, 0.7); /*can be anything, of course*/
-`
 
 const SongsContainer = () => {
   const [active, setActive] = useState(0);
@@ -152,9 +144,7 @@ const SongsContainer = () => {
         <Carousel items={items} bind={bind} width={width} springs={springs}>
           {({ css }: { css: any }, i: number) => (
             <Content>
-              <ImageOverlay>
                 <Image style={{ backgroundImage: css }}/>
-              </ImageOverlay>
               <StyledH1
                   style={{
                     position: "absolute",
