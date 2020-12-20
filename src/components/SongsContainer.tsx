@@ -65,6 +65,8 @@ const Image = styled(a.div)`
     -25px -25px 35px 5px #003333 inset;
   position: absolute;
   border: solid ${({ theme }) => theme.colors.darkgreen} 2px;
+  cursor: url('https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png') 39 39, auto;
+
 `;
 
 const Menu = styled.div`
