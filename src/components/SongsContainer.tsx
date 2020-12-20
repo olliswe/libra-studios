@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import styled from "styled-components";
 import { a } from "react-spring";
 import AquiImg from "assets/images/aqui.jpeg";
@@ -8,6 +8,7 @@ import LaventanaImg from "assets/images/laventana.jpg";
 import SolaImg from "assets/images/sola.jpg";
 import Carousel from "components/Slidev2";
 import H1 from "components/elements/H1";
+import useSliderLogic from "hooks/useSliderLogic";
 
 const items = [
   {
@@ -90,21 +91,45 @@ const NavBar = styled.div`
 
 const StyledH1 = styled(H1)`
   color: ${({ theme }) => theme.colors.orange};
-  font-size: 16px;
+  font-size: 18px;
 `;
 
 const EmptyImage = styled.div`
   display: none;
 `;
 
-const CurrentSong = styled.span`
+const CurrentSong = styled.span<{ isActive: boolean }>`
   font-family: ${({ theme }) => theme.fonts.ProximaRegular};
   color: ${({ theme }) => theme.colors.orange};
+  opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
   text-transform: uppercase;
+  margin: 0 0.5rem;
+  cursor: pointer;
 `;
 
 const SongsContainer = () => {
   const [active, setActive] = useState(0);
+  const prev = useRef([0, 1]);
+  const index = useRef(0);
+
+  const { bind, debounceTransition, springs, width } = useSliderLogic({
+    itemWidth: "full",
+    items,
+    index,
+    prev,
+    setActive,
+  });
+
+  const handleClick = useCallback(
+    (clickedIndex) => {
+      if (clickedIndex < active) {
+        debounceTransition(clickedIndex + (items.length - active));
+        return;
+      }
+      debounceTransition(clickedIndex - active);
+    },
+    [active, debounceTransition]
+  );
 
   return (
     <Main>
@@ -112,12 +137,7 @@ const SongsContainer = () => {
         <StyledH1>LIBRA STUDIOS</StyledH1>
       </NavBar>
       <CarouselWrapper ml={window.innerWidth / 20}>
-        <Carousel
-          items={items}
-          active={active}
-          setActive={setActive}
-          itemWidth={window.innerWidth - window.innerWidth / 10}
-        >
+        <Carousel items={items} bind={bind} width={width} springs={springs}>
           {({ css }: { css: any }, i: number) => (
             <Content>
               <Image style={{ backgroundImage: css }}>
@@ -137,10 +157,20 @@ const SongsContainer = () => {
         </Carousel>
       </CarouselWrapper>
       <Menu>
-        <CurrentSong>{items[active].label}</CurrentSong>
+        {items.map((item, i) => (
+          <CurrentSong
+            key={i}
+            isActive={i === active}
+            onClick={() => {
+              handleClick(i);
+            }}
+          >
+            {item.label}
+          </CurrentSong>
+        ))}
       </Menu>
       {items.map((item) => (
-        <EmptyImage style={{ backgroundImage: item.css }} />
+        <EmptyImage key={item.name} style={{ backgroundImage: item.css }} />
       ))}
     </Main>
   );

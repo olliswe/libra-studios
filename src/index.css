@@ -1,22 +1,22 @@
 
 
-@font-face {
-  font-family: 'ProximaBold';
-  font-style: normal;
-  font-weight: normal;
-  src:  url('assets/fonts/Proxima Nova Bold.otf') format('otf');
-  font-display: swap;
+/*@font-face {*/
+/*  font-family: 'ProximaBold';*/
+/*  font-style: normal;*/
+/*  font-weight: normal;*/
+/*  src:  url('assets/fonts/Proxima Nova Bold.otf') format('otf');*/
+/*  font-display: swap;*/
 
-}
+/*}*/
 
-@font-face {
-  font-family: 'ProximaThin';
-  font-style: normal;
-  font-weight: normal;
-  src:  url('assets/fonts/Proxima Nova Thin.otf') format('otf');
-  font-display: swap;
+/*@font-face {*/
+/*  font-family: 'ProximaThin';*/
+/*  font-style: normal;*/
+/*  font-weight: normal;*/
+/*  src:  url('assets/fonts/Proxima Nova Thin.otf') format('otf');*/
+/*  font-display: swap;*/
 
-}
+/*}*/
 
 @font-face {
   font-family: 'ProximaRegular';

@@ -2,9 +2,7 @@ type screenType = "phone" | "tablet" | "laptop" | "desktop" | "wide" | "custom";
 
 const fonts = {
   Bodini: "Bodini",
-  ProximaThin: "ProximaThin",
   ProximaRegular: "ProximaRegular",
-  ProximaBold: "ProximaBold",
 } as const;
 
 const colors = {
