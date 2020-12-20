@@ -64,6 +64,7 @@ const Image = styled(a.div)`
   box-shadow: 25px 25px 35px 5px #003333 inset,
     -25px -25px 35px 5px #003333 inset;
   position: absolute;
+  border: solid ${({ theme }) => theme.colors.darkgreen} 2px;
 `;
 
 const Menu = styled.div`
@@ -113,7 +114,7 @@ const SongsContainer = () => {
   const index = useRef(0);
 
   const { bind, debounceTransition, springs, width } = useSliderLogic({
-    itemWidth: "full",
+    itemWidth: window.innerWidth - window.innerWidth / 10,
     items,
     index,
     prev,
