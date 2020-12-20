@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import SongsContainer from "./components/SongsContainer";
 import { ThemeProvider } from "styled-components";
 import { theme } from "helpers/theme";
@@ -10,7 +10,8 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-        <SongsContainer />
+          <Route path={'/music'} component={SongsContainer}/>
+          <Redirect to={'/music'}/>
       </BrowserRouter>
     </ThemeProvider>
   );
