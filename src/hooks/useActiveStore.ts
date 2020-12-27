@@ -4,7 +4,7 @@ interface ActiveStore extends State {
   active: number;
   currentSong: number | null;
   setActive: (active: number) => void;
-  setCurrentSong: (currentSong: number) => void;
+  setCurrentSong: (currentSong: number | null) => void;
 }
 
 const useActiveStore = create<ActiveStore>((set) => ({

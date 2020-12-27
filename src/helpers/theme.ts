@@ -39,3 +39,5 @@ export const theme = {
   media,
   mediaSizes,
 };
+
+export type ITheme = typeof theme;

@@ -10,7 +10,7 @@ import H1 from "components/elements/H1";
 import useSliderLogic from "hooks/useSliderLogic";
 import useActiveStore from "hooks/useActiveStore";
 import SliderContent from "components/SliderContent";
-import ReactPlayer from "react-player";
+import MusicPlayer from "components/MusicPlayer";
 
 export const items = [
   {
@@ -91,7 +91,7 @@ const CurrentSong = styled.span<{ isActive: boolean }>`
 
 const SongsContainer = () => {
   const active = useActiveStore((state) => state.active);
-  const currentSong = useActiveStore((state) => state.currentSong);
+
   const prev = useRef([0, 1]);
   const index = useRef(0);
 
@@ -114,41 +114,37 @@ const SongsContainer = () => {
   );
 
   return (
-    <Main>
-      {currentSong && (
-        <ReactPlayer
-          url={items[currentSong].mp3}
-          style={{ display: "none" }}
-          playing={true}
-        />
-      )}
-      <NavBar>
-        <StyledH1>LIBRA STUDIOS</StyledH1>
-      </NavBar>
-      <CarouselWrapper>
-        <Carousel items={items} bind={bind} width={width} springs={springs}>
-          {({ css }: { css: any }, i: number) => (
-            <SliderContent bg={css} key={i} />
-          )}
-        </Carousel>
-      </CarouselWrapper>
-      <Menu>
-        {items.map((item, i) => (
-          <CurrentSong
-            key={i}
-            isActive={i === active}
-            onClick={() => {
-              handleClick(i);
-            }}
-          >
-            {item.label}
-          </CurrentSong>
+    <>
+      <MusicPlayer />
+      <Main>
+        <NavBar>
+          <StyledH1>LIBRA STUDIOS</StyledH1>
+        </NavBar>
+        <CarouselWrapper>
+          <Carousel items={items} bind={bind} width={width} springs={springs}>
+            {({ css }: { css: any }, i: number) => (
+              <SliderContent bg={css} key={i} />
+            )}
+          </Carousel>
+        </CarouselWrapper>
+        <Menu>
+          {items.map((item, i) => (
+            <CurrentSong
+              key={i}
+              isActive={i === active}
+              onClick={() => {
+                handleClick(i);
+              }}
+            >
+              {item.label}
+            </CurrentSong>
+          ))}
+        </Menu>
+        {items.map((item, index) => (
+          <EmptyImage key={index} style={{ backgroundImage: item.css }} />
         ))}
-      </Menu>
-      {items.map((item, index) => (
-        <EmptyImage key={index} style={{ backgroundImage: item.css }} />
-      ))}
-    </Main>
+      </Main>
+    </>
   );
 };
 

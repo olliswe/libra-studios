@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { a } from "react-spring";
 import H1 from "components/elements/H1";
 import useActiveStore from "hooks/useActiveStore";
+import PlayButton from "components/elements/PlayButton";
+import PauseButton from "components/elements/PauseButton";
 
 interface ISliderContent {
   bg: any;
@@ -32,7 +34,7 @@ const Image = styled(a.div)`
   background-blend-mode: multiply;
 `;
 
-const PlayButton = styled.div`
+const PlayWrapper = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
@@ -42,13 +44,22 @@ const PlayButton = styled.div`
 
 const SliderContent = ({ bg }: ISliderContent) => {
   const active = useActiveStore((state) => state.active);
+  const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
-  const handleClick = () => setCurrentSong(active);
+  const handlePlay = () => setCurrentSong(active);
+  const handlePause = () => setCurrentSong(null);
+  const isPlaying = active === currentSong;
 
   return (
     <Content>
       <Image style={{ backgroundImage: bg }} />
-      <PlayButton onClick={handleClick}>Play</PlayButton>
+      <PlayWrapper>
+        {isPlaying ? (
+          <PauseButton onClick={handlePause} />
+        ) : (
+          <PlayButton onClick={handlePlay} />
+        )}
+      </PlayWrapper>
       <StyledH1
         style={{
           position: "absolute",
