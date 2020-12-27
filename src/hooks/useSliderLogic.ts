@@ -1,16 +1,26 @@
-import { useCallback } from "react";
+import { MutableRefObject, useCallback } from "react";
 import { useSprings } from "react-spring";
 import { useDrag } from "react-use-gesture";
 import debounce from "lodash-es/debounce";
+import useActiveStore from "hooks/useActiveStore";
+
+interface ISliderLogic {
+  itemWidth: number | "full";
+  items: any[];
+  index: MutableRefObject<number>;
+  prev: MutableRefObject<number[]>;
+  visible?: number;
+}
 
 const useSliderLogic = ({
   itemWidth,
   items,
   index,
   prev,
-  setActive,
   visible = items.length - 2,
-}: any) => {
+}: ISliderLogic) => {
+  const setActive = useActiveStore((state) => state.setActive);
+
   const windowWidth =
     window.innerWidth ||
     document.documentElement.clientWidth ||

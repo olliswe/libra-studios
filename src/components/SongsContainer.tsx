@@ -1,6 +1,5 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef } from "react";
 import styled from "styled-components";
-import { a } from "react-spring";
 import AquiImg from "assets/images/aqui.jpeg";
 import CitaImg from "assets/images/cita.jpg";
 import DetrasImg from "assets/images/detras.jpg";
@@ -9,61 +8,41 @@ import SolaImg from "assets/images/sola.jpg";
 import Carousel from "components/Slidev2";
 import H1 from "components/elements/H1";
 import useSliderLogic from "hooks/useSliderLogic";
+import useActiveStore from "hooks/useActiveStore";
+import SliderContent from "components/SliderContent";
+import ReactPlayer from "react-player";
 
-const items = [
+export const items = [
   {
     css: `url(${AquiImg})`,
-    height: 150,
-    name: "aqui",
     label: "Aqui",
+    mp3: "/songs/Aqui.mp3",
   },
   {
     css: `url(${CitaImg})`,
-    height: 300,
-    name: "cita",
     label: "Cita",
+    mp3: "/songs/Cita.mp3",
   },
   {
     css: `url(${DetrasImg})`,
-    height: 300,
-    name: "detras",
-    label: "Detras",
+    label: "Detras del Muro",
+    mp3: "/songs/DetrasdelMuro.mp3",
   },
   {
     css: `url(${LaventanaImg})`,
-    height: 300,
-    name: "laventa",
     label: "La Ventana",
+    mp3: "/songs/LaVentana.mp3",
   },
   {
     css: `url(${SolaImg})`,
-    height: 300,
-    name: "sola",
-    label: "Sola",
+    label: "Dunas",
+    mp3: "/songs/Dunas.mp3",
   },
 ];
 
 const Main = styled.div`
   height: 100vh;
-  width:100vw;
-
-`;
-
-const Content = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const Image = styled(a.div)`
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  cursor: url('https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png') 39 39, auto;
-  background-color: rgba(0,0,0,.3); // Tint color
-  background-blend-mode: multiply;
-
+  width: 100vw;
 `;
 
 const Menu = styled.div`
@@ -73,12 +52,12 @@ const Menu = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom:0
+  bottom: 0;
 `;
 
 const CarouselWrapper = styled.div`
- height:100%;
- width:100%;
+  height: 100%;
+  width: 100%;
 `;
 
 const NavBar = styled.div`
@@ -87,8 +66,8 @@ const NavBar = styled.div`
   padding: 0 20px;
   display: flex;
   align-items: center;
-  position:absolute;
-  top:0;
+  position: absolute;
+  top: 0;
   z-index: 2;
 `;
 
@@ -110,9 +89,9 @@ const CurrentSong = styled.span<{ isActive: boolean }>`
   cursor: pointer;
 `;
 
-
 const SongsContainer = () => {
-  const [active, setActive] = useState(0);
+  const active = useActiveStore((state) => state.active);
+  const currentSong = useActiveStore((state) => state.currentSong);
   const prev = useRef([0, 1]);
   const index = useRef(0);
 
@@ -121,7 +100,6 @@ const SongsContainer = () => {
     items,
     index,
     prev,
-    setActive,
   });
 
   const handleClick = useCallback(
@@ -137,25 +115,20 @@ const SongsContainer = () => {
 
   return (
     <Main>
+      {currentSong && (
+        <ReactPlayer
+          url={items[currentSong].mp3}
+          style={{ display: "none" }}
+          playing={true}
+        />
+      )}
       <NavBar>
         <StyledH1>LIBRA STUDIOS</StyledH1>
       </NavBar>
       <CarouselWrapper>
         <Carousel items={items} bind={bind} width={width} springs={springs}>
           {({ css }: { css: any }, i: number) => (
-            <Content>
-                <Image style={{ backgroundImage: css }}/>
-              <StyledH1
-                  style={{
-                    position: "absolute",
-                    bottom: "20%",
-                    left: "10%",
-                    fontSize: "48px",
-                  }}
-              >
-                {items[active].label}
-              </StyledH1>
-            </Content>
+            <SliderContent bg={css} key={i} />
           )}
         </Carousel>
       </CarouselWrapper>
@@ -172,8 +145,8 @@ const SongsContainer = () => {
           </CurrentSong>
         ))}
       </Menu>
-      {items.map((item) => (
-        <EmptyImage key={item.name} style={{ backgroundImage: item.css }} />
+      {items.map((item, index) => (
+        <EmptyImage key={index} style={{ backgroundImage: item.css }} />
       ))}
     </Main>
   );
