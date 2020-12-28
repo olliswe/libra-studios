@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { items } from "components/SongsContainer";
 import styled from "styled-components";
 import { a } from "react-spring";
@@ -6,6 +6,8 @@ import useActiveStore from "hooks/useActiveStore";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
 import { StyledH1 } from "components/Shared";
+import ShareIcon from "components/elements/ShareIcon";
+import copy from "copy-to-clipboard";
 
 interface ISliderContent {
   bg: any;
@@ -22,9 +24,7 @@ const Image = styled(a.div)`
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  cursor: url("https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png")
-      39 39,
-    auto;
+
   background-color: rgba(0, 0, 0, 0.3); // Tint color
   background-blend-mode: multiply;
 `;
@@ -37,6 +37,31 @@ const PlayWrapper = styled.div`
   cursor: pointer;
 `;
 
+const Wrapper = styled.div`
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 6%;
+`;
+
+const SongTitle = styled(StyledH1)`
+  font-size: 48px;
+  margin-right: 1rem;
+`;
+
+export const ShareCopy = styled.span<{ showCopy: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.ProximaRegular};
+  color: ${({ theme }) => theme.colors.orange};
+  text-transform: uppercase;
+  margin-left: 1rem;
+  font-size: 12px;
+  opacity: ${({ showCopy }) => (showCopy ? 1 : 0)};
+  transition: opacity 0.5s ease-in-out;
+`;
+
 const SliderContent = ({ bg }: ISliderContent) => {
   const active = useActiveStore((state) => state.active);
   const currentSong = useActiveStore((state) => state.currentSong);
@@ -44,6 +69,13 @@ const SliderContent = ({ bg }: ISliderContent) => {
   const handlePlay = () => setCurrentSong(active);
   const handlePause = () => setCurrentSong(null);
   const isPlaying = active === currentSong;
+  const [showCopy, setShowCopy] = useState(false);
+
+  const handleShare = useCallback(() => {
+    copy(window.location.origin + "/music?track=" + items[active].id);
+    setShowCopy(true);
+    setTimeout(() => setShowCopy(false), 2000);
+  }, [active]);
 
   return (
     <Content>
@@ -55,16 +87,11 @@ const SliderContent = ({ bg }: ISliderContent) => {
           <PlayButton onClick={handlePlay} />
         )}
       </PlayWrapper>
-      <StyledH1
-        style={{
-          position: "absolute",
-          bottom: "20%",
-          left: "10%",
-          fontSize: "48px",
-        }}
-      >
-        {items[active].label}
-      </StyledH1>
+      <Wrapper>
+        <SongTitle>{items[active].label}</SongTitle>
+        <ShareIcon onClick={handleShare} />
+        <ShareCopy showCopy={showCopy}>Link copied to clipboard</ShareCopy>
+      </Wrapper>
     </Content>
   );
 };

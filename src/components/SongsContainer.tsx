@@ -13,31 +13,43 @@ import MusicPlayer from "components/MusicPlayer";
 import { CurrentSong } from "./Shared";
 import Navbar from "components/Navbar";
 
-export const items = [
+interface IIitem {
+  css: string;
+  label: string;
+  mp3: string;
+  id: string;
+}
+
+export const items: IIitem[] = [
   {
     css: `url(${AquiImg})`,
     label: "Aqui",
     mp3: "/songs/Aqui.mp3",
+    id: "aqui",
   },
   {
     css: `url(${CitaImg})`,
     label: "Cita",
     mp3: "/songs/Cita.mp3",
+    id: "cita",
   },
   {
     css: `url(${DetrasImg})`,
     label: "Detras del Muro",
     mp3: "/songs/DetrasdelMuro.mp3",
+    id: "detrasdelmuro",
   },
   {
     css: `url(${LaventanaImg})`,
     label: "La Ventana",
     mp3: "/songs/LaVentana.mp3",
+    id: "laventana",
   },
   {
     css: `url(${SolaImg})`,
     label: "Dunas",
     mp3: "/songs/Dunas.mp3",
+    id: "dunas",
   },
 ];
 
@@ -50,7 +62,8 @@ const Menu = styled.div`
   width: 100%;
   height: 6rem;
   display: flex;
-  justify-content: center;
+  padding: 0 5%;
+  justify-content: flex-end;
   align-items: center;
   position: absolute;
   bottom: 0;

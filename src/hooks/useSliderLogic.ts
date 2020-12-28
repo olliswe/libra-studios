@@ -108,6 +108,15 @@ const useSliderLogic = ({
 
   const goToIndex = useCallback(
     (index) => {
+      if (
+        index - active === -3 ||
+        index - active === -2 ||
+        index - active === -1
+      ) {
+        debounceTransition(index - active);
+        return;
+      }
+
       if (index < active) {
         debounceTransition(index + (items.length - active));
         return;

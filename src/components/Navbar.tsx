@@ -9,7 +9,7 @@ import PauseButton from "components/elements/PauseButton";
 const NavBar = styled.div`
   height: 100px;
   width: 100%;
-  padding: 0 50px;
+  padding: 0 5%;
   display: flex;
   align-items: center;
   position: absolute;
@@ -23,7 +23,7 @@ const Wrapper = styled.div<{ show: boolean }>`
   display: flex;
   align-items: center;
   opacity: ${({ show }) => (show ? 1 : 0)};
-  transition: opacity 2s ease-in-out;
+  transition: opacity 1s ease-in-out;
 `;
 
 const Navbar = () => {
@@ -43,9 +43,6 @@ const Navbar = () => {
     <NavBar>
       <StyledH1>LIBRA STUDIOS</StyledH1>
       <Wrapper show={currentSong !== null}>
-        <CurrentSong isActive={false} style={{ cursor: "auto" }}>
-          PLAYING
-        </CurrentSong>
         <CurrentSong
           isActive={true}
           style={{ cursor: "auto", marginRight: "1rem" }}

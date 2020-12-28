@@ -4,14 +4,15 @@ import SongsContainer from "./components/SongsContainer";
 import { ThemeProvider } from "styled-components";
 import { theme } from "helpers/theme";
 import GlobalStyle from "components/GlobalStyle";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-          <Route path={'/music'} component={SongsContainer}/>
-          <Redirect to={'/music'}/>
+        <Route path={"/music"} component={SongsContainer} />
+        <Redirect to={"/music"} />
       </BrowserRouter>
     </ThemeProvider>
   );
