@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CurrentSong, StyledH1 } from "./Shared";
 import useActiveStore from "hooks/useActiveStore";
-import { items } from "components/SongsContainer";
+import { items } from "helpers/items";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
 

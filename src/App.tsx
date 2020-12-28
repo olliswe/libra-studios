@@ -4,7 +4,6 @@ import SongsContainer from "./components/SongsContainer";
 import { ThemeProvider } from "styled-components";
 import { theme } from "helpers/theme";
 import GlobalStyle from "components/GlobalStyle";
-import "react-toastify/dist/ReactToastify.css";
 import { QueryParamProvider } from "use-query-params";
 
 const App = () => {

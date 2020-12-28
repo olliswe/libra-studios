@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import ReactPlayer from "react-player";
-import { items } from "components/SongsContainer";
+import { items } from "helpers/items";
 import useActiveStore from "hooks/useActiveStore";
 
 const MusicPlayer = ({ goToIndex }: { goToIndex: (input: number) => void }) => {

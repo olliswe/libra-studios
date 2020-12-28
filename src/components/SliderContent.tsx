@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { items } from "components/SongsContainer";
+import { items } from "helpers/items";
 import styled from "styled-components";
 import { a } from "react-spring";
 import useActiveStore from "hooks/useActiveStore";

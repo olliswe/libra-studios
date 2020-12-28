@@ -1,10 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import AquiImg from "assets/images/aqui.jpeg";
-import CitaImg from "assets/images/cita.jpg";
-import DetrasImg from "assets/images/detras.jpg";
-import LaventanaImg from "assets/images/laventana.jpg";
-import SolaImg from "assets/images/sola.jpg";
 import Carousel from "components/Slidev2";
 import useSliderLogic from "hooks/useSliderLogic";
 import useActiveStore from "hooks/useActiveStore";
@@ -12,47 +7,8 @@ import SliderContent from "components/SliderContent";
 import MusicPlayer from "components/MusicPlayer";
 import { CurrentSong } from "./Shared";
 import Navbar from "components/Navbar";
-import { useQueryParam, StringParam } from "use-query-params";
-
-interface IIitem {
-  css: string;
-  label: string;
-  mp3: string;
-  id: string;
-}
-
-export const items: IIitem[] = [
-  {
-    css: `url(${AquiImg})`,
-    label: "Aqui",
-    mp3: "/songs/Aqui.mp3",
-    id: "aqui",
-  },
-  {
-    css: `url(${CitaImg})`,
-    label: "Cita",
-    mp3: "/songs/Cita.mp3",
-    id: "cita",
-  },
-  {
-    css: `url(${DetrasImg})`,
-    label: "Detras del Muro",
-    mp3: "/songs/DetrasdelMuro.mp3",
-    id: "detrasdelmuro",
-  },
-  {
-    css: `url(${LaventanaImg})`,
-    label: "La Ventana",
-    mp3: "/songs/LaVentana.mp3",
-    id: "laventana",
-  },
-  {
-    css: `url(${SolaImg})`,
-    label: "Dunas",
-    mp3: "/songs/Dunas.mp3",
-    id: "dunas",
-  },
-];
+import { StringParam, useQueryParam } from "use-query-params";
+import { items } from "helpers/items";
 
 const Main = styled.div`
   height: 100vh;

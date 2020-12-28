@@ -7,7 +7,7 @@ const fonts = {
 
 const colors = {
   darkgreen: "#003333",
-  orange: "#ffbd66",
+  orange: "#ffe9cc",
 } as const;
 
 const customMediaQuery = (minWidth: number) =>
