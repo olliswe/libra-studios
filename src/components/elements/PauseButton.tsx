@@ -24,7 +24,7 @@ const PauseButton = ({
   width = "6rem",
   height = "6rem",
   bg = theme.colors.orange,
-  viewBox = "0 0 512 512",
+  viewBox = "0 0 100 100",
   onClick,
 }: IPauseButton & ThemeProps<ITheme>) => {
   return (
@@ -37,8 +37,10 @@ const PauseButton = ({
         onClick={onClick}
       >
         <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M100 50C100 77.6142 77.6142 100 50 100C22.3858 100 0 77.6142 0 50C0 22.3858 22.3858 0 50 0C77.6142 0 100 22.3858 100 50ZM41 35H48V65H41V35ZM60 35H53V65H60V35Z"
           fill={bg}
-          d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm-32 272a16 16 0 01-32 0V192a16 16 0 0132 0zm96 0a16 16 0 01-32 0V192a16 16 0 0132 0z"
         />
       </SVGWrapper>
     </HoverStyles>
