@@ -5,6 +5,7 @@ import useActiveStore from "hooks/useActiveStore";
 import { items } from "helpers/items";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
+import { useHistory } from "react-router";
 
 const NavBar = styled.div`
   height: 100px;
@@ -30,7 +31,7 @@ const Navbar = () => {
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
   const [lastSong, setLastSong] = useState("");
-
+  const history = useHistory();
   useEffect(() => {
     if (currentSong !== null) {
       setLastSong(items[currentSong].label);
@@ -38,10 +39,13 @@ const Navbar = () => {
   }, [currentSong]);
 
   const handlePause = () => setCurrentSong(null);
+  const handleHome = () => history.push("/");
 
   return (
     <NavBar>
-      <StyledH1>MAQUINA STUDIOS</StyledH1>
+      <StyledH1 style={{ cursor: "pointer" }} onClick={handleHome}>
+        MAQUINA STUDIOS
+      </StyledH1>
       <Wrapper show={currentSong !== null}>
         <CurrentSong
           isActive={true}

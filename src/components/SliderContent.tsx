@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { items } from "helpers/items";
 import styled from "styled-components";
-import { a, useSpring } from "react-spring";
+import { animated, useSpring } from "react-spring";
 import useActiveStore from "hooks/useActiveStore";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
@@ -19,7 +19,7 @@ const Content = styled.div`
   height: 100%;
 `;
 
-const Image = styled(a.div)`
+const Image = styled(animated.div)`
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -38,7 +38,7 @@ const PlayWrapper = styled.div`
   cursor: pointer;
 `;
 
-const Wrapper = styled(a.div)`
+const Wrapper = styled(animated.div)`
   height: 6rem;
   display: flex;
   justify-content: center;

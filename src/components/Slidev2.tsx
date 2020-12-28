@@ -1,5 +1,5 @@
 import React from "react";
-import { a } from "react-spring";
+import { animated } from "react-spring";
 
 // Mask image is really important if we decide our carousel shouldn't span the whole window
 const styles = {
@@ -38,7 +38,7 @@ const Carousel = ({
   return (
     <div {...bind()} style={{ ...style, ...styles.container, width }}>
       {springs.map(({ x }: any, i: number) => (
-        <a.div
+        <animated.div
           key={i}
           //@ts-ignore
           style={{ ...styles.item, width, x }}

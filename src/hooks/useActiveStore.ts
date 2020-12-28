@@ -5,6 +5,7 @@ interface ActiveStore extends State {
   currentSong: number | null;
   setActive: (active: number) => void;
   setCurrentSong: (currentSong: number | null) => void;
+  reset: () => void;
 }
 
 const useActiveStore = create<ActiveStore>((set) => ({
@@ -12,6 +13,7 @@ const useActiveStore = create<ActiveStore>((set) => ({
   currentSong: null,
   setActive: (active) => set({ active }),
   setCurrentSong: (currentSong) => set({ currentSong }),
+  reset: () => set({ active: 0, currentSong: null }),
 }));
 
 export default useActiveStore;

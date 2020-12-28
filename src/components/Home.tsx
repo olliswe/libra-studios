@@ -13,6 +13,9 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-color: rgba(0, 0, 0, 0.3); // Tint color
   background-blend-mode: multiply;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const Content = styled.div`
