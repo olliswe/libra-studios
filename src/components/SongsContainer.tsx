@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import AquiImg from "assets/images/aqui.jpeg";
 import CitaImg from "assets/images/cita.jpg";
@@ -71,27 +71,16 @@ const SongsContainer = () => {
   const prev = useRef([0, 1]);
   const index = useRef(0);
 
-  const { bind, debounceTransition, springs, width } = useSliderLogic({
+  const { bind, goToIndex, springs, width } = useSliderLogic({
     itemWidth: "full",
     items,
     index,
     prev,
   });
 
-  const handleClick = useCallback(
-    (clickedIndex) => {
-      if (clickedIndex < active) {
-        debounceTransition(clickedIndex + (items.length - active));
-        return;
-      }
-      debounceTransition(clickedIndex - active);
-    },
-    [active, debounceTransition]
-  );
-
   return (
     <>
-      <MusicPlayer />
+      <MusicPlayer goToIndex={goToIndex} />
       <Main>
         <Navbar />
         <CarouselWrapper>
@@ -107,7 +96,7 @@ const SongsContainer = () => {
               key={i}
               isActive={i === active}
               onClick={() => {
-                handleClick(i);
+                goToIndex(i);
               }}
             >
               {item.label}

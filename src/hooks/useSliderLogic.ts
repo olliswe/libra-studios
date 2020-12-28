@@ -6,10 +6,10 @@ import useActiveStore from "hooks/useActiveStore";
 
 interface ISliderLogic {
   itemWidth: number | "full";
-  items: any[];
   index: MutableRefObject<number>;
   prev: MutableRefObject<number[]>;
   visible?: number;
+  items: any[];
 }
 
 const useSliderLogic = ({
@@ -20,6 +20,7 @@ const useSliderLogic = ({
   visible = items.length - 2,
 }: ISliderLogic) => {
   const setActive = useActiveStore((state) => state.setActive);
+  const active = useActiveStore((state) => state.active);
 
   const windowWidth =
     window.innerWidth ||
@@ -105,7 +106,18 @@ const useSliderLogic = ({
 
   const debounceTransition = debounce(buttons, 10);
 
-  return { bind, debounceTransition, springs, width };
+  const goToIndex = useCallback(
+    (index) => {
+      if (index < active) {
+        debounceTransition(index + (items.length - active));
+        return;
+      }
+      debounceTransition(index - active);
+    },
+    [active, debounceTransition, items.length]
+  );
+
+  return { bind, debounceTransition, springs, width, goToIndex };
 };
 
 export default useSliderLogic;
