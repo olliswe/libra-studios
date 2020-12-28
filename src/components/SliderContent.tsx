@@ -2,10 +2,10 @@ import React from "react";
 import { items } from "components/SongsContainer";
 import styled from "styled-components";
 import { a } from "react-spring";
-import H1 from "components/elements/H1";
 import useActiveStore from "hooks/useActiveStore";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
+import { StyledH1 } from "components/Shared";
 
 interface ISliderContent {
   bg: any;
@@ -14,11 +14,6 @@ interface ISliderContent {
 const Content = styled.div`
   width: 100%;
   height: 100%;
-`;
-
-const StyledH1 = styled(H1)`
-  color: ${({ theme }) => theme.colors.orange};
-  font-size: 18px;
 `;
 
 const Image = styled(a.div)`

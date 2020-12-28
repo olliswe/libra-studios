@@ -6,11 +6,12 @@ import DetrasImg from "assets/images/detras.jpg";
 import LaventanaImg from "assets/images/laventana.jpg";
 import SolaImg from "assets/images/sola.jpg";
 import Carousel from "components/Slidev2";
-import H1 from "components/elements/H1";
 import useSliderLogic from "hooks/useSliderLogic";
 import useActiveStore from "hooks/useActiveStore";
 import SliderContent from "components/SliderContent";
 import MusicPlayer from "components/MusicPlayer";
+import { CurrentSong } from "./Shared";
+import Navbar from "components/Navbar";
 
 export const items = [
   {
@@ -60,33 +61,8 @@ const CarouselWrapper = styled.div`
   width: 100%;
 `;
 
-const NavBar = styled.div`
-  height: 100px;
-  width: 100%;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  z-index: 2;
-`;
-
-const StyledH1 = styled(H1)`
-  color: ${({ theme }) => theme.colors.orange};
-  font-size: 18px;
-`;
-
 const EmptyImage = styled.div`
   display: none;
-`;
-
-const CurrentSong = styled.span<{ isActive: boolean }>`
-  font-family: ${({ theme }) => theme.fonts.ProximaRegular};
-  color: ${({ theme }) => theme.colors.orange};
-  opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
-  text-transform: uppercase;
-  margin: 0 0.5rem;
-  cursor: pointer;
 `;
 
 const SongsContainer = () => {
@@ -117,9 +93,7 @@ const SongsContainer = () => {
     <>
       <MusicPlayer />
       <Main>
-        <NavBar>
-          <StyledH1>LIBRA STUDIOS</StyledH1>
-        </NavBar>
+        <Navbar />
         <CarouselWrapper>
           <Carousel items={items} bind={bind} width={width} springs={springs}>
             {({ css }: { css: any }, i: number) => (
