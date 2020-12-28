@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { items } from "helpers/items";
 import styled from "styled-components";
-import { a } from "react-spring";
+import { a, useSpring } from "react-spring";
 import useActiveStore from "hooks/useActiveStore";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
@@ -11,6 +11,7 @@ import copy from "copy-to-clipboard";
 
 interface ISliderContent {
   bg: any;
+  index: number;
 }
 
 const Content = styled.div`
@@ -37,7 +38,7 @@ const PlayWrapper = styled.div`
   cursor: pointer;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled(a.div)`
   height: 6rem;
   display: flex;
   justify-content: center;
@@ -48,7 +49,7 @@ const Wrapper = styled.div`
 `;
 
 const SongTitle = styled(StyledH1)`
-  font-size: 48px;
+  font-size: 60px;
   margin-right: 1rem;
 `;
 
@@ -62,7 +63,7 @@ export const ShareCopy = styled.span<{ showCopy: boolean }>`
   transition: opacity 0.5s ease-in-out;
 `;
 
-const SliderContent = ({ bg }: ISliderContent) => {
+const SliderContent = ({ bg, index }: ISliderContent) => {
   const active = useActiveStore((state) => state.active);
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
@@ -70,6 +71,17 @@ const SliderContent = ({ bg }: ISliderContent) => {
   const handlePause = () => setCurrentSong(null);
   const isPlaying = active === currentSong;
   const [showCopy, setShowCopy] = useState(false);
+
+  const [animProps, setAnim] = useSpring(() => ({
+    o: 0,
+  }));
+
+  useEffect(() => {
+    setAnim({
+      o: index === active ? 1 : 0,
+      config: { duration: 2000 },
+    });
+  }, [index, active, setAnim]);
 
   const handleShare = useCallback(() => {
     copy(window.location.origin + "/music?track=" + items[active].id);
@@ -87,10 +99,14 @@ const SliderContent = ({ bg }: ISliderContent) => {
           <PlayButton onClick={handlePlay} />
         )}
       </PlayWrapper>
-      <Wrapper>
-        <SongTitle>{items[active].label}</SongTitle>
-        <ShareIcon onClick={handleShare} />
-        <ShareCopy showCopy={showCopy}>Link copied to clipboard</ShareCopy>
+      <Wrapper style={{ opacity: animProps.o as any }}>
+        <>
+          <SongTitle style={{ color: items[active].color }}>
+            {items[active].label}
+          </SongTitle>
+          <ShareIcon onClick={handleShare} />
+          <ShareCopy showCopy={showCopy}>Link copied to clipboard</ShareCopy>
+        </>
       </Wrapper>
     </Content>
   );

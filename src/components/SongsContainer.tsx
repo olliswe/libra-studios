@@ -31,10 +31,6 @@ const CarouselWrapper = styled.div`
   width: 100%;
 `;
 
-const EmptyImage = styled.div`
-  display: none;
-`;
-
 const SongsContainer = () => {
   const active = useActiveStore((state) => state.active);
 
@@ -67,7 +63,7 @@ const SongsContainer = () => {
         <CarouselWrapper>
           <Carousel items={items} bind={bind} width={width} springs={springs}>
             {({ css }: { css: any }, i: number) => (
-              <SliderContent bg={css} key={i} />
+              <SliderContent bg={css} key={i} index={i} />
             )}
           </Carousel>
         </CarouselWrapper>
@@ -84,9 +80,6 @@ const SongsContainer = () => {
             </CurrentSong>
           ))}
         </Menu>
-        {items.map((item, index) => (
-          <EmptyImage key={index} style={{ backgroundImage: item.css }} />
-        ))}
       </Main>
     </>
   );
