@@ -41,7 +41,7 @@ const Navbar = () => {
 
   return (
     <NavBar>
-      <StyledH1>LIBRA STUDIOS</StyledH1>
+      <StyledH1>MAQUINA STUDIOS</StyledH1>
       <Wrapper show={currentSong !== null}>
         <CurrentSong
           isActive={true}

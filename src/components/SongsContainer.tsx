@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import AquiImg from "assets/images/aqui.jpeg";
 import CitaImg from "assets/images/cita.jpg";
@@ -12,6 +12,7 @@ import SliderContent from "components/SliderContent";
 import MusicPlayer from "components/MusicPlayer";
 import { CurrentSong } from "./Shared";
 import Navbar from "components/Navbar";
+import { useQueryParam, StringParam } from "use-query-params";
 
 interface IIitem {
   css: string;
@@ -59,7 +60,6 @@ const Main = styled.div`
 `;
 
 const Menu = styled.div`
-  width: 100%;
   height: 6rem;
   display: flex;
   padding: 0 5%;
@@ -67,6 +67,7 @@ const Menu = styled.div`
   align-items: center;
   position: absolute;
   bottom: 0;
+  right: 0;
 `;
 
 const CarouselWrapper = styled.div`
@@ -90,6 +91,17 @@ const SongsContainer = () => {
     index,
     prev,
   });
+
+  const [track] = useQueryParam("track", StringParam);
+
+  useEffect(() => {
+    if (track) {
+      const foundTrack = items.findIndex((x) => x.id === track);
+      if (foundTrack > -1) {
+        goToIndex(foundTrack);
+      }
+    }
+  }, [track, goToIndex]);
 
   return (
     <>
