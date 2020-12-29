@@ -6,7 +6,7 @@ import { items } from "helpers/items";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
 import { useHistory } from "react-router";
-import Logo from "assets/images/logo.png";
+import Logo from "assets/images/logov2.png";
 
 const NavBar = styled.div`
   height: 100px;

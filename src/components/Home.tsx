@@ -3,7 +3,7 @@ import styled from "styled-components";
 import HomeImg from "assets/images/home.jpg";
 import { useHistory } from "react-router";
 import MailIcon from "components/elements/MailIcon";
-import Logo from "assets/images/logo.png";
+import Logo from "assets/images/logov2.png";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -54,7 +54,7 @@ const StyledButton = styled.button`
 `;
 
 const Img = styled.img`
-  height: 100px;
+  height: 150px;
   margin-bottom: 0.5rem;
 `;
 
