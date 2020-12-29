@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import HomeImg from "assets/images/home.jpg";
-import { StyledH1 } from "components/Shared";
 import { useHistory } from "react-router";
 import MailIcon from "components/elements/MailIcon";
+import Logo from "assets/images/logo.png";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -30,12 +30,6 @@ const Content = styled.div`
   align-items: center;
 `;
 
-const Title = styled(StyledH1)`
-  font-size: 34px;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-`;
-
 const Subtitle = styled.span`
   font-family: ${({ theme }) => theme.fonts.ProximaRegular};
   text-transform: uppercase;
@@ -59,13 +53,18 @@ const StyledButton = styled.button`
   }
 `;
 
+const Img = styled.img`
+  height: 100px;
+  margin-bottom: 0.5rem;
+`;
+
 const Home = () => {
   const history = useHistory();
 
   return (
     <Wrapper>
       <Content>
-        <Title>MAQUINA STUDIOS</Title>
+        <Img src={Logo} />
         <Subtitle>SCORES FOR THE SCREEN</Subtitle>
         <StyledButton onClick={() => history.push("/music")}>
           <Subtitle>ENTER</Subtitle>

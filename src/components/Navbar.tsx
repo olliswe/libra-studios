@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { CurrentSong, StyledH1 } from "./Shared";
+import { CurrentSong } from "./Shared";
 import useActiveStore from "hooks/useActiveStore";
 import { items } from "helpers/items";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
 import { useHistory } from "react-router";
+import Logo from "assets/images/logo.png";
 
 const NavBar = styled.div`
   height: 100px;
@@ -27,6 +28,15 @@ const Wrapper = styled.div<{ show: boolean }>`
   transition: opacity 1s ease-in-out;
 `;
 
+const ImgWrapper = styled.div`
+  cursor: pointer;
+  display: inline-flex;
+`;
+
+const Img = styled.img`
+  height: 70px;
+`;
+
 const Navbar = () => {
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
@@ -43,9 +53,9 @@ const Navbar = () => {
 
   return (
     <NavBar>
-      <StyledH1 style={{ cursor: "pointer" }} onClick={handleHome}>
-        MAQUINA STUDIOS
-      </StyledH1>
+      <ImgWrapper onClick={handleHome}>
+        <Img src={Logo} />
+      </ImgWrapper>
       <Wrapper show={currentSong !== null}>
         <CurrentSong
           isActive={true}
