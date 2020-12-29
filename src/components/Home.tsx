@@ -3,6 +3,7 @@ import styled from "styled-components";
 import HomeImg from "assets/images/home.jpg";
 import { StyledH1 } from "components/Shared";
 import { useHistory } from "react-router";
+import MailIcon from "components/elements/MailIcon";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -21,7 +22,7 @@ const Wrapper = styled.div`
 const Content = styled.div`
   position: absolute;
   left: 50%;
-  top: 45%;
+  top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -50,7 +51,7 @@ const StyledButton = styled.button`
   border: none;
   opacity: 0.7;
   cursor: pointer;
-  margin-top: 1.2rem;
+  margin: 1.2rem 0 1rem 0;
   border-radius: 2px;
 
   :hover {
@@ -69,6 +70,7 @@ const Home = () => {
         <StyledButton onClick={() => history.push("/music")}>
           <Subtitle>ENTER</Subtitle>
         </StyledButton>
+        <MailIcon />
       </Content>
     </Wrapper>
   );

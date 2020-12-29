@@ -36,7 +36,6 @@ body {
   display: flex;
   align-items: center;
 }
-
     `;
 
 export default GlobalStyle;

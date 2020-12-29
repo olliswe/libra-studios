@@ -5,10 +5,10 @@ import useSliderLogic from "hooks/useSliderLogic";
 import useActiveStore from "hooks/useActiveStore";
 import SliderContent from "components/SliderContent";
 import MusicPlayer from "components/MusicPlayer";
-import { CurrentSong } from "./Shared";
 import Navbar from "components/Navbar";
 import { StringParam, useQueryParam } from "use-query-params";
 import { items } from "helpers/items";
+import Menu from "components/Menu";
 
 const Main = styled.div`
   height: 100vh;
@@ -18,24 +18,12 @@ const Main = styled.div`
   left: 0;
 `;
 
-const Menu = styled.div`
-  height: 6rem;
-  display: flex;
-  padding: 0 5%;
-  justify-content: flex-end;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-`;
-
 const CarouselWrapper = styled.div`
   height: 100%;
   width: 100%;
 `;
 
 const SongsContainer = () => {
-  const active = useActiveStore((state) => state.active);
   const reset = useActiveStore((state) => state.reset);
 
   const prev = useRef([0, 1]);
@@ -79,19 +67,7 @@ const SongsContainer = () => {
           )}
         </Carousel>
       </CarouselWrapper>
-      <Menu>
-        {items.map((item, i) => (
-          <CurrentSong
-            key={i}
-            isActive={i === active}
-            onClick={() => {
-              goToIndex(i);
-            }}
-          >
-            {item.label}
-          </CurrentSong>
-        ))}
-      </Menu>
+      <Menu goToIndex={goToIndex} />
     </Main>
   );
 };
