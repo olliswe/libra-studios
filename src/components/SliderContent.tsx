@@ -5,7 +5,6 @@ import { animated, useSpring } from "react-spring";
 import useActiveStore from "hooks/useActiveStore";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
-import { StyledH1 } from "components/Shared";
 
 interface ISliderContent {
   bg: any;
@@ -24,7 +23,7 @@ const Image = styled(animated.div)`
   background-position: center center;
   background-repeat: no-repeat;
 
-  background-color: rgba(0, 0, 0, 0.3); // Tint color
+  background-color: rgba(0, 0, 0, 0.4); // Tint color
   background-blend-mode: multiply;
 `;
 
@@ -37,7 +36,7 @@ const PlayWrapper = styled.div`
 `;
 
 const Wrapper = styled(animated.div)`
-  height: 6rem;
+  height: 10rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,10 +45,7 @@ const Wrapper = styled(animated.div)`
   left: 6%;
 `;
 
-const SongTitle = styled(StyledH1)`
-  font-size: 60px;
-  margin-right: 1rem;
-`;
+const StyledImg = styled.img``;
 
 const SliderContent = ({ bg, index }: ISliderContent) => {
   const active = useActiveStore((state) => state.active);
@@ -81,11 +77,11 @@ const SliderContent = ({ bg, index }: ISliderContent) => {
         )}
       </PlayWrapper>
       <Wrapper style={{ opacity: animProps.o as any }}>
-        <>
-          <SongTitle style={{ color: items[active].color }}>
-            {items[active].label}
-          </SongTitle>
-        </>
+        <StyledImg
+          src={items[active].nameImg}
+          alt=""
+          style={{ height: items[active].nameHeight }}
+        />
       </Wrapper>
     </Content>
   );

@@ -18,7 +18,7 @@ const ShareCopy = styled.span<{ showCopy: boolean }>`
 `;
 
 const Wrapper = styled.div`
-  height: 6rem;
+  height: 10rem;
   display: flex;
   padding: 0 5%;
   justify-content: flex-end;

@@ -10,7 +10,6 @@ import Home from "components/Home";
 import { animated, useTransition } from "react-spring";
 
 const EmptyImage = styled.div`
-  display: none;
   height: 0;
   width: 0;
 `;
