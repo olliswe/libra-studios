@@ -39,17 +39,16 @@ const Subtitle = styled.span`
 `;
 
 const StyledButton = styled.button`
-  padding: 0.8rem 1.25rem;
-  background: rgba(232, 93, 59, 0.77);
+  padding: 0.7rem 1.25rem;
+  background: transparent;
   outline: none;
-  border: none;
-  opacity: 0.7;
+  opacity: 1;
   cursor: pointer;
   margin: 1.2rem 0 1rem 0;
-  border-radius: 2px;
+  border: solid 2px ${({ theme }) => theme.colors.orange};
 
   :hover {
-    opacity: 1;
+    background: rgba(255, 233, 204, 0.2);
   }
 `;
 
