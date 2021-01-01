@@ -37,6 +37,8 @@ function fmtMSS(s: number) {
 
 const MusicSlider = ({ playerRef }: { playerRef: any }) => {
   const songProgress = useActiveStore((state) => state.songProgress);
+  const songSeconds = useActiveStore((state) => state.songSeconds);
+  const songDuration = useActiveStore((state) => state.songDuration);
 
   const handleChange = useCallback(
     (event, value) => {
@@ -54,15 +56,9 @@ const MusicSlider = ({ playerRef }: { playerRef: any }) => {
         <Slider value={songProgress * 100} onChange={handleChange} />
       </Styles>
       <TimeWrapper>
-        <Time>
-          {playerRef.current
-            ? fmtMSS(playerRef.current.getCurrentTime())
-            : "0:00"}
-        </Time>
+        <Time>{songSeconds ? fmtMSS(songSeconds) : "0:00"}</Time>
         &nbsp;<Time>/</Time>&nbsp;
-        <Time>
-          {playerRef.current ? fmtMSS(playerRef.current.getDuration()) : "0:00"}
-        </Time>
+        <Time>{songDuration ? fmtMSS(songDuration) : "0:00"}</Time>
       </TimeWrapper>
     </>
   );

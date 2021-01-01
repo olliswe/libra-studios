@@ -13,6 +13,8 @@ const MusicPlayer = ({
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
   const setSongProgress = useActiveStore((state) => state.setSongProgress);
+  const setSongSeconds = useActiveStore((state) => state.setSongSeconds);
+  const setSongDuration = useActiveStore((state) => state.setSongDuration);
 
   const handleEnded = useCallback(() => {
     if (currentSong === null) {
@@ -34,9 +36,11 @@ const MusicPlayer = ({
       url={items[currentSong].mp3}
       style={{ display: "none" }}
       playing={true}
-      onProgress={({ played }) => {
+      onProgress={({ played, playedSeconds }) => {
         setSongProgress(played);
+        setSongSeconds(playedSeconds);
       }}
+      onDuration={(duration) => setSongDuration(duration)}
     />
   );
 };
