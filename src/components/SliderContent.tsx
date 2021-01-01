@@ -76,7 +76,9 @@ const SliderContent = ({ bg, index }: ISliderContent) => {
           <PlayButton onClick={handlePlay} />
         )}
       </PlayWrapper>
-      <Wrapper style={{ opacity: animProps.o as any }}>
+      <Wrapper
+        style={{ opacity: animProps.o.interpolate((o) => o * o) as any }}
+      >
         <StyledImg
           src={items[active].nameImg}
           alt=""

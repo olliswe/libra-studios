@@ -27,7 +27,7 @@ export const items: IIitem[] = [
     mp3: "/songs/LaVentana.mp3",
     id: "laventana",
     nameImg: LaventTxt,
-    nameHeight: "6rem",
+    nameHeight: "4rem",
   },
   {
     css: `url(${AquiImg})`,
@@ -35,7 +35,7 @@ export const items: IIitem[] = [
     mp3: "/songs/Aqui.mp3",
     id: "aqui",
     nameImg: AquiTxt,
-    nameHeight: "8rem",
+    nameHeight: "6rem",
   },
   {
     css: `url(${CitaImg})`,
@@ -43,7 +43,7 @@ export const items: IIitem[] = [
     mp3: "/songs/Cita.mp3",
     id: "cita",
     nameImg: CitaTxt,
-    nameHeight: "8rem",
+    nameHeight: "4.5rem",
   },
   {
     css: `url(${DetrasImg})`,
@@ -51,7 +51,7 @@ export const items: IIitem[] = [
     mp3: "/songs/DetrasdelMuro.mp3",
     id: "detrasdelmuro",
     nameImg: DetrasTxt,
-    nameHeight: "6rem",
+    nameHeight: "4rem",
   },
 
   {
@@ -60,7 +60,7 @@ export const items: IIitem[] = [
     mp3: "/songs/Dunas.mp3",
     id: "sola",
     nameImg: SolaTxt,
-    nameHeight: "8rem",
+    nameHeight: "4.3rem",
   },
   {
     css: `url(${DunasImg})`,
@@ -68,6 +68,6 @@ export const items: IIitem[] = [
     mp3: "/songs/Dunas.mp3",
     id: "dunas",
     nameImg: DunasTxt,
-    nameHeight: "7rem",
+    nameHeight: "4rem",
   },
 ];
