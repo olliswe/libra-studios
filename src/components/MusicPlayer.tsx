@@ -5,10 +5,10 @@ import useActiveStore from "hooks/useActiveStore";
 
 const MusicPlayer = ({
   goToIndex,
-  setPlayerRef,
+  playerRef,
 }: {
   goToIndex: (input: number) => void;
-  setPlayerRef: any;
+  playerRef: any;
 }) => {
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
@@ -29,7 +29,7 @@ const MusicPlayer = ({
 
   return (
     <ReactPlayer
-      ref={(newRef) => setPlayerRef(newRef)}
+      ref={playerRef}
       onEnded={handleEnded}
       url={items[currentSong].mp3}
       style={{ display: "none" }}

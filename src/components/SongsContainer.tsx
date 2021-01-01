@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Carousel from "components/Slidev2";
 import useSliderLogic from "hooks/useSliderLogic";
@@ -25,7 +25,7 @@ const CarouselWrapper = styled.div`
 
 const SongsContainer = () => {
   const reset = useActiveStore((state) => state.reset);
-  const [playerRef, setPlayerRef] = useState<any>();
+  const playerRef = useRef<any>();
 
   const prev = useRef([0, 1]);
   const index = useRef(0);
@@ -58,7 +58,7 @@ const SongsContainer = () => {
 
   return (
     <Main>
-      <MusicPlayer goToIndex={goToIndex} setPlayerRef={setPlayerRef} />
+      <MusicPlayer goToIndex={goToIndex} playerRef={playerRef} />
 
       <Navbar playerRef={playerRef} />
       <CarouselWrapper>

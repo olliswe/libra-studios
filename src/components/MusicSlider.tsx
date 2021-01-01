@@ -1,5 +1,5 @@
 import Slider from "@material-ui/core/Slider";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import useActiveStore from "hooks/useActiveStore";
 
@@ -38,16 +38,12 @@ function fmtMSS(s: number) {
 const MusicSlider = ({ playerRef }: { playerRef: any }) => {
   const songProgress = useActiveStore((state) => state.songProgress);
 
-  useEffect(() => {
-    console.log(playerRef);
-  }, [playerRef]);
-
   const handleChange = useCallback(
     (event, value) => {
-      if (!playerRef) {
+      if (!playerRef.current) {
         return;
       }
-      playerRef.seekTo(value / 100);
+      playerRef.current.seekTo(value / 100);
     },
     [playerRef]
   );
@@ -58,9 +54,15 @@ const MusicSlider = ({ playerRef }: { playerRef: any }) => {
         <Slider value={songProgress * 100} onChange={handleChange} />
       </Styles>
       <TimeWrapper>
-        <Time>{playerRef ? fmtMSS(playerRef.getCurrentTime()) : "0:00"}</Time>
+        <Time>
+          {playerRef.current
+            ? fmtMSS(playerRef.current.getCurrentTime())
+            : "0:00"}
+        </Time>
         &nbsp;<Time>/</Time>&nbsp;
-        <Time>{playerRef ? fmtMSS(playerRef.getDuration()) : "0:00"}</Time>
+        <Time>
+          {playerRef.current ? fmtMSS(playerRef.current.getDuration()) : "0:00"}
+        </Time>
       </TimeWrapper>
     </>
   );
