@@ -36,7 +36,7 @@ const PlayWrapper = styled.div`
 `;
 
 const Wrapper = styled(animated.div)`
-  height: 10rem;
+  height: 8rem;
   display: flex;
   justify-content: center;
   align-items: center;

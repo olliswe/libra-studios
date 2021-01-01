@@ -6,7 +6,7 @@ export const CurrentSong = styled.span<{ isActive: boolean }>`
   color: ${({ theme }) => theme.colors.orange};
   opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
   text-transform: uppercase;
-  margin: 0 0.5rem;
+  margin-left: 1rem;
   cursor: pointer;
 `;
 

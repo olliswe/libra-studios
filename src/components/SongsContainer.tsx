@@ -25,6 +25,7 @@ const CarouselWrapper = styled.div`
 
 const SongsContainer = () => {
   const reset = useActiveStore((state) => state.reset);
+  const playerRef = useRef<any>();
 
   const prev = useRef([0, 1]);
   const index = useRef(0);
@@ -57,9 +58,9 @@ const SongsContainer = () => {
 
   return (
     <Main>
-      <MusicPlayer goToIndex={goToIndex} />
+      <MusicPlayer goToIndex={goToIndex} playerRef={playerRef} />
 
-      <Navbar />
+      <Navbar playerRef={playerRef} />
       <CarouselWrapper>
         <Carousel items={items} bind={bind} width={width} springs={springs}>
           {({ css }: { css: any }, i: number) => (

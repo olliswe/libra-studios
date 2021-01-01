@@ -7,6 +7,7 @@ import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
 import { useHistory } from "react-router";
 import Logo from "assets/images/logov2.png";
+import MusicSlider from "components/MusicSlider";
 
 const NavBar = styled.div`
   height: 100px;
@@ -23,9 +24,11 @@ const NavBar = styled.div`
 const Wrapper = styled.div<{ show: boolean }>`
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   opacity: ${({ show }) => (show ? 1 : 0)};
   transition: opacity 1s ease-in-out;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const ImgWrapper = styled.div`
@@ -37,7 +40,13 @@ const Img = styled.img`
   height: 70px;
 `;
 
-const Navbar = () => {
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const Navbar = ({ playerRef }: { playerRef: any }) => {
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
   const [lastSong, setLastSong] = useState("");
@@ -57,17 +66,22 @@ const Navbar = () => {
         <Img src={Logo} />
       </ImgWrapper>
       <Wrapper show={currentSong !== null}>
-        <CurrentSong
-          isActive={true}
-          style={{ cursor: "auto", marginRight: "1rem" }}
-        >
-          {lastSong}
-        </CurrentSong>
-        {currentSong !== null ? (
-          <PauseButton height={"2rem"} width={"2rem"} onClick={handlePause} />
-        ) : (
-          <PlayButton height={"2rem"} width={"2rem"} />
-        )}
+        <Row>
+          <CurrentSong
+            isActive={true}
+            style={{ cursor: "auto", marginRight: "1rem" }}
+          >
+            {lastSong}
+          </CurrentSong>
+          {currentSong !== null ? (
+            <PauseButton height={"2rem"} width={"2rem"} onClick={handlePause} />
+          ) : (
+            <PlayButton height={"2rem"} width={"2rem"} />
+          )}
+        </Row>
+        <Row>
+          <MusicSlider playerRef={playerRef} />
+        </Row>
       </Wrapper>
     </NavBar>
   );

@@ -1,12 +1,18 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback } from "react";
 import ReactPlayer from "react-player";
 import { items } from "helpers/items";
 import useActiveStore from "hooks/useActiveStore";
 
-const MusicPlayer = ({ goToIndex }: { goToIndex: (input: number) => void }) => {
+const MusicPlayer = ({
+  goToIndex,
+  playerRef,
+}: {
+  goToIndex: (input: number) => void;
+  playerRef: any;
+}) => {
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
-  const player = useRef<any>();
+  const setSongProgress = useActiveStore((state) => state.setSongProgress);
 
   const handleEnded = useCallback(() => {
     if (currentSong === null) {
@@ -23,11 +29,14 @@ const MusicPlayer = ({ goToIndex }: { goToIndex: (input: number) => void }) => {
 
   return (
     <ReactPlayer
-      ref={player}
+      ref={playerRef}
       onEnded={handleEnded}
       url={items[currentSong].mp3}
       style={{ display: "none" }}
       playing={true}
+      onProgress={({ played }) => {
+        setSongProgress(played);
+      }}
     />
   );
 };
