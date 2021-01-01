@@ -24,7 +24,8 @@ export const items: IIitem[] = [
   {
     css: `url(${LaventanaImg})`,
     label: "La Ventana",
-    mp3: "/songs/Encoded_LaVentana.mp3",
+    mp3:
+      "https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/Encoded_LaVentana.mp3?alt=media",
     id: "laventana",
     nameImg: LaventTxt,
     nameHeight: "4rem",
@@ -32,7 +33,8 @@ export const items: IIitem[] = [
   {
     css: `url(${AquiImg})`,
     label: "Aqui",
-    mp3: "/songs/Encoded_Aqui.mp3",
+    mp3:
+      "https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/Encoded_Aqui.mp3?alt=media",
     id: "aqui",
     nameImg: AquiTxt,
     nameHeight: "6rem",
@@ -40,7 +42,8 @@ export const items: IIitem[] = [
   {
     css: `url(${CitaImg})`,
     label: "Cita",
-    mp3: "/songs/Encoded_Cita.mp3",
+    mp3:
+      "https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/Encoded_Cita.mp3?alt=media",
     id: "cita",
     nameImg: CitaTxt,
     nameHeight: "4.5rem",
@@ -48,7 +51,8 @@ export const items: IIitem[] = [
   {
     css: `url(${DetrasImg})`,
     label: "DETRÁS DEL MURO",
-    mp3: "/songs/Encoded_Detras.mp3",
+    mp3:
+      "https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/Encoded_Detras.mp3?alt=media",
     id: "detrasdelmuro",
     nameImg: DetrasTxt,
     nameHeight: "4rem",
@@ -57,7 +61,8 @@ export const items: IIitem[] = [
   {
     css: `url(${SolaImg})`,
     label: "Sola",
-    mp3: "/songs/Encoded_Dunas.mp3",
+    mp3:
+      "https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/Encoded_Dunas.mp3?alt=media",
     id: "sola",
     nameImg: SolaTxt,
     nameHeight: "4.3rem",
@@ -65,7 +70,8 @@ export const items: IIitem[] = [
   {
     css: `url(${DunasImg})`,
     label: "Dunas",
-    mp3: "/songs/Encoded_Dunas.mp3",
+    mp3:
+      "https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/Encoded_Dunas.mp3?alt=media",
     id: "dunas",
     nameImg: DunasTxt,
     nameHeight: "4rem",
