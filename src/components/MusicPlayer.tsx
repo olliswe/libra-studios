@@ -33,7 +33,7 @@ const MusicPlayer = ({
     <ReactPlayer
       ref={playerRef}
       onEnded={handleEnded}
-      url={items[currentSong].mp3}
+      url={"https://maquinastudios.com" + items[currentSong].mp3}
       style={{ display: "none" }}
       playing={true}
       onProgress={({ played, playedSeconds }) => {

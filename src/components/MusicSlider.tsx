@@ -42,12 +42,12 @@ const MusicSlider = ({ playerRef }: { playerRef: any }) => {
 
   const handleChange = useCallback(
     (event, value) => {
-      if (!playerRef.current) {
+      if (!playerRef.current || !songDuration) {
         return;
       }
-      playerRef.current.seekTo(value / 100);
+      playerRef.current.seekTo((value / 100) * songDuration, "seconds");
     },
-    [playerRef]
+    [playerRef, songDuration]
   );
 
   return (
