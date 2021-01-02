@@ -4,10 +4,11 @@ import HomeImg from "assets/images/home.jpg";
 import { useHistory } from "react-router";
 import MailIcon from "components/elements/MailIcon";
 import Logo from "assets/images/logov2.png";
+import { theme } from "helpers/theme";
 
 const Wrapper = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: url(${HomeImg});
   background-size: cover;
   background-position: center center;
@@ -55,6 +56,9 @@ const StyledButton = styled.button`
 const Img = styled.img`
   height: 150px;
   margin-bottom: 0.5rem;
+  ${theme.media.phone} {
+    height: 100px;
+  }
 `;
 
 const Home = () => {

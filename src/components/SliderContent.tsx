@@ -5,6 +5,7 @@ import { animated, useSpring } from "react-spring";
 import useActiveStore from "hooks/useActiveStore";
 import PlayButton from "components/elements/PlayButton";
 import PauseButton from "components/elements/PauseButton";
+import { theme } from "helpers/theme";
 
 interface ISliderContent {
   bg: any;
@@ -43,9 +44,20 @@ const Wrapper = styled(animated.div)`
   position: absolute;
   bottom: 0;
   left: 6%;
+
+  ${theme.media.phone} {
+    left: unset;
+    width: 100%;
+    height: unset;
+    bottom: 10%;
+  }
 `;
 
-const StyledImg = styled.img``;
+const SongNameImg = styled.img`
+  ${theme.media.phone} {
+    transform: scale(0.6);
+  }
+`;
 
 const SliderContent = ({ bg, index }: ISliderContent) => {
   const active = useActiveStore((state) => state.active);
@@ -79,7 +91,7 @@ const SliderContent = ({ bg, index }: ISliderContent) => {
       <Wrapper
         style={{ opacity: animProps.o.interpolate((o) => o * o) as any }}
       >
-        <StyledImg
+        <SongNameImg
           src={items[active].nameImg}
           alt=""
           style={{ height: items[active].nameHeight }}

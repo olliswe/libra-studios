@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { CurrentSong } from "./Shared";
 import useActiveStore from "hooks/useActiveStore";
 import { items } from "helpers/items";
 import PlayButton from "components/elements/PlayButton";
@@ -8,6 +7,7 @@ import PauseButton from "components/elements/PauseButton";
 import { useHistory } from "react-router";
 import Logo from "assets/images/logov2.png";
 import MusicSlider from "components/MusicSlider";
+import { theme } from "helpers/theme";
 
 const NavBar = styled.div`
   height: 100px;
@@ -19,6 +19,10 @@ const NavBar = styled.div`
   top: 0;
   z-index: 2;
   justify-content: space-between;
+
+  ${theme.media.phone} {
+    top: 2%;
+  }
 `;
 
 const Wrapper = styled.div<{ show: boolean }>`
@@ -38,12 +42,24 @@ const ImgWrapper = styled.div`
 
 const Img = styled.img`
   height: 70px;
+  ${theme.media.phone} {
+    height: 45px;
+  }
 `;
 
 const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+`;
+
+const CurrentSong = styled.span<{ isActive: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.ProximaRegular};
+  color: ${({ theme }) => theme.colors.orange};
+  opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
+  text-transform: uppercase;
+  margin-left: 1rem;
+  cursor: pointer;
 `;
 
 const Navbar = ({ playerRef }: { playerRef: any }) => {

@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
 import { items } from "helpers/items";
-import { CurrentSong } from "components/Shared";
 import useActiveStore from "hooks/useActiveStore";
 import styled from "styled-components";
 import ShareIcon from "components/elements/ShareIcon";
 import copy from "copy-to-clipboard";
 import MailIcon from "components/elements/MailIcon";
+import { theme } from "helpers/theme";
 
 const ShareCopy = styled.span<{ showCopy: boolean }>`
   font-family: ${({ theme }) => theme.fonts.ProximaRegular};
@@ -28,7 +28,25 @@ const Wrapper = styled.div`
   right: 0;
 
   svg {
-    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+  ${theme.media.phone} {
+    height: unset;
+    bottom: 3%;
+  }
+`;
+
+const CurrentSong = styled.span<{ isActive: boolean }>`
+  font-family: ${({ theme }) => theme.fonts.ProximaRegular};
+  color: ${({ theme }) => theme.colors.orange};
+  opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
+  text-transform: uppercase;
+  margin-left: 1rem;
+  cursor: pointer;
+
+  ${theme.media.phone} {
+    display: none;
   }
 `;
 

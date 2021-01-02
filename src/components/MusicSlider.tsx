@@ -2,6 +2,7 @@ import Slider from "@material-ui/core/Slider";
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import useActiveStore from "hooks/useActiveStore";
+import { theme } from "helpers/theme";
 
 const Styles = styled.div`
   display: inline-flex;
@@ -13,6 +14,9 @@ const Styles = styled.div`
   .MuiSlider-root {
     width: 100px;
     color: ${({ theme }) => theme.colors.orange};
+    ${theme.media.phone} {
+      width: 75px;
+    }
   }
 `;
 

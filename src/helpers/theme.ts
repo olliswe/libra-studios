@@ -10,8 +10,8 @@ const colors = {
   orange: "#ffe9cc",
 } as const;
 
-const customMediaQuery = (minWidth: number) =>
-  `@media (min-width: ${minWidth}px)`;
+const customMediaQuery = (maxWidth: number) =>
+  `@media (max-width: ${maxWidth}px)`;
 
 const media: { [key in screenType]: any } = {
   custom: customMediaQuery,

@@ -9,6 +9,7 @@ import Navbar from "components/Navbar";
 import { StringParam, useQueryParam } from "use-query-params";
 import { items } from "helpers/items";
 import Menu from "components/Menu";
+import Dots from "components/Dots";
 
 const Main = styled.div`
   height: 100vh;
@@ -68,6 +69,7 @@ const SongsContainer = () => {
           )}
         </Carousel>
       </CarouselWrapper>
+      <Dots />
       <Menu goToIndex={goToIndex} />
     </Main>
   );
