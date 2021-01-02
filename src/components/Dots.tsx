@@ -10,7 +10,7 @@ const Navigation = styled.div`
 
   ${theme.media.phone} {
     position: absolute;
-    bottom: 12%;
+    bottom: 20%;
     width: 100%;
     z-index: 2;
     display: unset;

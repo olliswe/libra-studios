@@ -49,7 +49,7 @@ const Wrapper = styled(animated.div)`
     left: unset;
     width: 100%;
     height: unset;
-    bottom: 16%;
+    bottom: 24%;
   }
 `;
 
