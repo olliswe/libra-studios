@@ -3,7 +3,7 @@ import SVGWrapper from "components/elements/SVG";
 import styled, { ThemeProps, withTheme } from "styled-components";
 import { ITheme } from "helpers/theme";
 
-const EMAIL = "nick@maquinastudios.com";
+export const EMAIL = "nick@maquinastudios.com";
 
 interface IMailButton {
   width?: string;
