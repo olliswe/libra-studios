@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { theme } from "helpers/theme";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -26,13 +27,18 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  
+  
+  ${theme.media.phone}{
+  position:fixed
+  }
 }
 
 #root {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height:100wh;
+  height:100vh;
   display: flex;
   align-items: center;
 }

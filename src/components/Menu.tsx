@@ -33,7 +33,7 @@ const Wrapper = styled.div`
 
   ${theme.media.phone} {
     height: unset;
-    bottom: 3%;
+    bottom: 9%;
   }
 `;
 
