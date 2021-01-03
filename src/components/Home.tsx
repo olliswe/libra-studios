@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import HomeImg from "assets/images/home.jpg";
 import { useHistory } from "react-router";
@@ -6,6 +6,7 @@ import MailIcon, { EMAIL } from "components/elements/MailIcon";
 import Logo from "assets/images/logov2.png";
 import { theme } from "helpers/theme";
 import Nick from "assets/images/nick.png";
+import { StringParam, useQueryParam } from "use-query-params";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -99,12 +100,12 @@ const MailWrapper = styled.div`
 
 const Home = () => {
   const history = useHistory();
-  const [showAbout, setShowAbout] = useState(false);
+  const [about, setAbout] = useQueryParam("about", StringParam);
 
   return (
     <Wrapper>
       <Content>
-        {!showAbout ? (
+        {!about ? (
           <>
             <LogoImg src={Logo} />
 
@@ -112,7 +113,7 @@ const Home = () => {
             <StyledButton onClick={() => history.push("/music")}>
               <Subtitle>ENTER</Subtitle>
             </StyledButton>
-            <AboutLink onClick={() => setShowAbout(true)}>ABOUT</AboutLink>
+            <AboutLink onClick={() => setAbout("show")}>ABOUT</AboutLink>
           </>
         ) : (
           <>
@@ -125,7 +126,7 @@ const Home = () => {
               <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
             </MailWrapper>
             <NickImg src={Nick} />
-            <AboutLink onClick={() => setShowAbout(false)}>RETURN</AboutLink>
+            <AboutLink onClick={() => setAbout(undefined)}>RETURN</AboutLink>
           </>
         )}
       </Content>
