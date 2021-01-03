@@ -41,6 +41,14 @@ const Subtitle = styled.span`
   font-weight: 500;
 `;
 
+const Caption = styled.span`
+  font-family: ${({ theme }) => theme.fonts.ProximaRegular};
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #ffe6cc;
+  font-weight: 500;
+`;
+
 const AboutLink = styled.span`
   font-family: ${({ theme }) => theme.fonts.ProximaRegular};
   text-transform: uppercase;
@@ -119,12 +127,14 @@ const Home = () => {
           <>
             <AboutDesc>
               Maquina Studios creates scores for the screen. The studio was
-              founded by composer Nick Malmestrom in Stockholm, Sweden.
+              founded by composer Nick Malmestrom.
             </AboutDesc>
-            <AboutDesc>Bjurholmsgatan 3C, 116 38, Stockholm, Sweden</AboutDesc>
+            <Caption>REACH OUT TO US AT</Caption>
             <MailWrapper>
               <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
             </MailWrapper>
+            <Caption>OR VISIT US AT</Caption>
+            <AboutDesc>Bjurholmsgatan 3C, 116 38, Stockholm, Sweden</AboutDesc>
             <NickImg src={Nick} />
             <AboutLink onClick={() => setAbout(undefined)}>RETURN</AboutLink>
           </>
