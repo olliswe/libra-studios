@@ -129,7 +129,7 @@ const Home = () => {
               Maquina Studios creates scores for the screen. The studio was
               founded by composer Nick Malmestrom.
             </AboutDesc>
-            <Caption>REACH OUT TO US AT</Caption>
+            <Caption>REACH OUT AT</Caption>
             <MailWrapper>
               <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
             </MailWrapper>
