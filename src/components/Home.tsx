@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import HomeImg from "assets/images/home.jpg";
 import { useHistory } from "react-router";
 import MailIcon, { EMAIL } from "components/elements/MailIcon";
 import Logo from "assets/images/logov2.png";
@@ -11,12 +10,7 @@ import { StringParam, useQueryParam } from "use-query-params";
 const Wrapper = styled.div`
   height: 100%;
   width: 100%;
-  background: url(${HomeImg});
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-color: rgba(0, 0, 0, 0.45); // Tint color
-  background-blend-mode: multiply;
+  background: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
   left: 0;
@@ -106,41 +100,62 @@ const MailWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
+const StyledVideo = styled.video`
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  top: 50%;
+  left: 52%;
+
+  transform: translate(-52%, -50%);
+`;
+
 const Home = () => {
   const history = useHistory();
   const [about, setAbout] = useQueryParam("about", StringParam);
 
   return (
-    <Wrapper>
-      <Content>
-        {!about ? (
-          <>
-            <LogoImg src={Logo} />
+    <>
+      <StyledVideo autoPlay muted loop>
+        <source
+          src="https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/bgvid.mp4?alt=media"
+          type="video/mp4"
+        />
+      </StyledVideo>
 
-            <Subtitle>SCORES FOR THE SCREEN</Subtitle>
-            <StyledButton onClick={() => history.push("/music")}>
-              <Subtitle>ENTER</Subtitle>
-            </StyledButton>
-            <AboutLink onClick={() => setAbout("show")}>ABOUT</AboutLink>
-          </>
-        ) : (
-          <>
-            <AboutDesc>
-              Maquina Studios creates scores for the screen. The studio was
-              founded by composer Nick Malmestrom.
-            </AboutDesc>
-            <Caption>REACH OUT AT</Caption>
-            <MailWrapper>
-              <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
-            </MailWrapper>
-            <Caption>OR VISIT US AT</Caption>
-            <AboutDesc>Bjurholmsgatan 3C, 116 38, Stockholm, Sweden</AboutDesc>
-            <NickImg src={Nick} />
-            <AboutLink onClick={() => setAbout(undefined)}>RETURN</AboutLink>
-          </>
-        )}
-      </Content>
-    </Wrapper>
+      <Wrapper>
+        <Content>
+          {!about ? (
+            <>
+              <LogoImg src={Logo} />
+
+              <Subtitle>SCORES FOR THE SCREEN</Subtitle>
+              <StyledButton onClick={() => history.push("/music")}>
+                <Subtitle>ENTER</Subtitle>
+              </StyledButton>
+              <AboutLink onClick={() => setAbout("show")}>ABOUT</AboutLink>
+            </>
+          ) : (
+            <>
+              <AboutDesc>
+                Maquina Studios creates scores for the screen. The studio was
+                founded by composer Nick Malmestrom.
+              </AboutDesc>
+              <Caption>REACH OUT AT</Caption>
+              <MailWrapper>
+                <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
+              </MailWrapper>
+              <Caption>OR VISIT US AT</Caption>
+              <AboutDesc>
+                Bjurholmsgatan 3C, 116 38, Stockholm, Sweden
+              </AboutDesc>
+              <NickImg src={Nick} />
+              <AboutLink onClick={() => setAbout(undefined)}>RETURN</AboutLink>
+            </>
+          )}
+        </Content>
+      </Wrapper>
+    </>
   );
 };
 
