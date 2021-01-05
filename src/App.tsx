@@ -24,7 +24,10 @@ const App = () => {
         </QueryParamProvider>
       </BrowserRouter>
       {items.map((item, index) => (
-        <EmptyImage key={index} style={{ backgroundImage: item.css }} />
+        <>
+          <EmptyImage key={index} style={{ backgroundImage: item.css }} />
+          <EmptyImage key={index} style={{ backgroundImage: item.nameImg }} />
+        </>
       ))}
     </ThemeProvider>
   );

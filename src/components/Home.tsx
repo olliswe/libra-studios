@@ -4,7 +4,6 @@ import { useHistory } from "react-router";
 import MailIcon, { EMAIL } from "components/elements/MailIcon";
 import Logo from "assets/images/logov2.png";
 import { theme } from "helpers/theme";
-import Nick from "assets/images/nick.png";
 import { StringParam, useQueryParam } from "use-query-params";
 
 const Wrapper = styled.div`
@@ -75,14 +74,6 @@ const LogoImg = styled.img`
   }
 `;
 
-const NickImg = styled.img`
-  height: 40px;
-  margin-bottom: 1rem;
-  ${theme.media.phone} {
-    height: 20px;
-  }
-`;
-
 const AboutDesc = styled(Subtitle)`
   width: 600px;
   text-align: center;
@@ -108,6 +99,7 @@ const StyledVideo = styled.video`
   left: 52%;
 
   transform: translate(-52%, -50%);
+  z-index: -1;
 `;
 
 const Home = () => {
@@ -116,7 +108,7 @@ const Home = () => {
 
   return (
     <>
-      <StyledVideo autoPlay muted loop>
+      <StyledVideo autoPlay muted loop playsInline>
         <source
           src="https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/bgvid.mp4?alt=media"
           type="video/mp4"
@@ -149,7 +141,6 @@ const Home = () => {
               <AboutDesc>
                 Bjurholmsgatan 3C, 116 38, Stockholm, Sweden
               </AboutDesc>
-              <NickImg src={Nick} />
               <AboutLink onClick={() => setAbout(undefined)}>RETURN</AboutLink>
             </>
           )}
