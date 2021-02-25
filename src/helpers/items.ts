@@ -62,7 +62,7 @@ export const items: IIitem[] = [
     css: `url(${SolaImg})`,
     label: "Sola",
     mp3:
-      "https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/Encoded_Dunas.mp3?alt=media",
+      "https://firebasestorage.googleapis.com/v0/b/nick-malmestrom.appspot.com/o/Encoded_Sola.mp3?alt=media",
     id: "sola",
     nameImg: SolaTxt,
     nameHeight: "4.3rem",
