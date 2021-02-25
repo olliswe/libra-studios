@@ -3,7 +3,8 @@ import SVGWrapper from "components/elements/SVG";
 import styled, { ThemeProps, withTheme } from "styled-components";
 import { ITheme } from "helpers/theme";
 
-export const EMAIL = "nick@maquinastudios.com";
+export const EMAIL = "milton@maquinastudios.com";
+export const EMAIL_2 = "nick@maquinastudios.com";
 
 interface IMailButton {
   width?: string;
@@ -11,6 +12,7 @@ interface IMailButton {
   bg?: string;
   viewBox?: string;
   onClick?: any;
+  email?: string;
 }
 
 const HoverStyles = styled.a`
@@ -31,9 +33,10 @@ const MailIcon = ({
   bg = theme.colors.orange,
   viewBox = "0 0 100 100",
   onClick,
+  email = EMAIL,
 }: IMailButton & ThemeProps<ITheme>) => {
   return (
-    <HoverStyles href={`mailto:${EMAIL}`} target={"_blank"}>
+    <HoverStyles href={`mailto:${email}`} target={"_blank"}>
       <SVGWrapper
         width={width}
         height={height}

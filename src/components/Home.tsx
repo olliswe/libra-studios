@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
-import MailIcon, { EMAIL } from "components/elements/MailIcon";
+import MailIcon, { EMAIL, EMAIL_2 } from "components/elements/MailIcon";
 import Logo from "assets/images/logov2.png";
 import { theme } from "helpers/theme";
 import { StringParam, useQueryParam } from "use-query-params";
@@ -84,11 +84,20 @@ const AboutDesc = styled(Subtitle)`
   }
 `;
 
+const Row = styled.div`
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3rem;
+`;
+
 const MailWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  flex-direction: column;
+  margin-top: 0.5rem;
 `;
 
 const StyledVideo = styled.video`
@@ -131,11 +140,17 @@ const Home = () => {
             <>
               <AboutDesc>
                 Maquina Studios creates scores for the screen. The studio was
-                founded by composer Nick Malmestrom.
+                founded by Nick & Milton Malmestrom.
               </AboutDesc>
               <Caption>REACH OUT AT</Caption>
               <MailWrapper>
-                <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
+                <Row>
+                  <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
+                </Row>
+                <Row>
+                  <Subtitle>{EMAIL_2}</Subtitle>&nbsp;&nbsp;
+                  <MailIcon email={EMAIL_2} />
+                </Row>
               </MailWrapper>
               <Caption>OR VISIT US AT</Caption>
               <AboutDesc>
