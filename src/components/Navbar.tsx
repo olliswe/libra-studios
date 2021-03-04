@@ -1,38 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import useActiveStore from "hooks/useActiveStore";
 import { items } from "helpers/items";
-import PlayButton from "components/elements/PlayButton";
-import PauseButton from "components/elements/PauseButton";
 import { useHistory } from "react-router";
 import Logo from "assets/images/logov2.png";
-import MusicSlider from "components/MusicSlider";
 import { theme } from "helpers/theme";
+import MusicPlayer from "components/MusicPlayer";
 
 const NavBar = styled.div`
-  height: 100px;
   width: 100%;
   padding: 0 5%;
   display: flex;
-  align-items: center;
   position: absolute;
-  top: 0;
+  top: 10px;
   z-index: 2;
-  justify-content: space-between;
+  flex-direction: column;
 
   ${theme.media.phone} {
     top: 2%;
   }
-`;
-
-const Wrapper = styled.div<{ show: boolean }>`
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  opacity: ${({ show }) => (show ? 1 : 0)};
-  transition: opacity 1s ease-in-out;
-  flex-direction: column;
-  justify-content: center;
 `;
 
 const ImgWrapper = styled.div`
@@ -47,58 +33,71 @@ const Img = styled.img`
   }
 `;
 
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const CurrentSong = styled.span<{ isActive: boolean }>`
+const CurrentSong = styled.span<{ isActive: boolean; show: boolean }>`
   font-family: ${({ theme }) => theme.fonts.ProximaRegular};
   color: ${({ theme }) => theme.colors.orange};
   opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
   text-transform: uppercase;
   margin-left: 1rem;
   cursor: pointer;
+  font-size: 1.2rem;
+  opacity: ${({ show }) => (show ? 1 : 0)};
+  transition: opacity 1s ease-in-out;
 `;
 
-const Navbar = ({ playerRef }: { playerRef: any }) => {
-  const currentSong = useActiveStore((state) => state.currentSong);
-  const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
-  const [lastSong, setLastSong] = useState("");
-  const history = useHistory();
-  useEffect(() => {
-    if (currentSong !== null) {
-      setLastSong(items[currentSong].label);
-    }
-  }, [currentSong]);
+const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-  const handlePause = () => setCurrentSong(null);
+const PlayerWrapper = styled.div<{ show: boolean }>`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: -10px;
+  opacity: ${({ show }) => (show ? 1 : 0)};
+  transition: opacity 1s ease-in-out;
+
+  ${theme.media.phone} {
+    margin-top: 10px;
+  }
+`;
+
+interface INavbar {
+  goToIndex: (input: number) => void;
+}
+
+const Navbar = ({ goToIndex }: INavbar) => {
+  const currentSong = useActiveStore((state) => state.currentSong);
+  const active = useActiveStore((state) => state.active);
+  const history = useHistory();
+
   const handleHome = () => history.push("/");
+
+  console.log(currentSong);
 
   return (
     <NavBar>
-      <ImgWrapper onClick={handleHome}>
-        <Img src={Logo} />
-      </ImgWrapper>
-      <Wrapper show={currentSong !== null}>
-        <Row>
-          <CurrentSong
-            isActive={true}
-            style={{ cursor: "auto", marginRight: "1rem" }}
-          >
-            {lastSong}
-          </CurrentSong>
-          {currentSong !== null ? (
-            <PauseButton height={"2rem"} width={"2rem"} onClick={handlePause} />
-          ) : (
-            <PlayButton height={"2rem"} width={"2rem"} />
-          )}
-        </Row>
-        <Row>
-          <MusicSlider playerRef={playerRef} />
-        </Row>
-      </Wrapper>
+      <Row>
+        <ImgWrapper onClick={handleHome}>
+          <Img src={Logo} />
+        </ImgWrapper>
+        <CurrentSong
+          isActive={true}
+          style={{
+            cursor: "auto",
+          }}
+          show={currentSong !== null}
+        >
+          {currentSong !== null
+            ? items[currentSong].label
+            : items[active].label}
+        </CurrentSong>
+      </Row>
+      <PlayerWrapper show={currentSong !== null}>
+        <MusicPlayer goToIndex={goToIndex} />
+      </PlayerWrapper>
     </NavBar>
   );
 };

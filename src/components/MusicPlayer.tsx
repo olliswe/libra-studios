@@ -3,18 +3,12 @@ import ReactPlayer from "react-player";
 import { items } from "helpers/items";
 import useActiveStore from "hooks/useActiveStore";
 
-const MusicPlayer = ({
-  goToIndex,
-  playerRef,
-}: {
-  goToIndex: (input: number) => void;
-  playerRef: any;
-}) => {
+const MusicPlayer = ({ goToIndex }: { goToIndex: (input: number) => void }) => {
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
-  const setSongProgress = useActiveStore((state) => state.setSongProgress);
-  const setSongSeconds = useActiveStore((state) => state.setSongSeconds);
-  const setSongDuration = useActiveStore((state) => state.setSongDuration);
+  const active = useActiveStore((state) => state.active);
+  const setPlaying = useActiveStore((state) => state.setPlaying);
+  const playing = useActiveStore((state) => state.playing);
 
   const handleEnded = useCallback(() => {
     if (currentSong === null) {
@@ -25,23 +19,25 @@ const MusicPlayer = ({
     goToIndex(newIndex);
   }, [currentSong, goToIndex, setCurrentSong]);
 
-  if (currentSong === null) {
-    return null;
-  }
-
   return (
     <ReactPlayer
-      ref={playerRef}
       onEnded={handleEnded}
-      url={items[currentSong].mp3}
-      style={{ display: "none" }}
-      playing={true}
-      onProgress={({ played, playedSeconds }) => {
-        setSongProgress(played);
-        setSongSeconds(playedSeconds);
+      url={currentSong ? items[currentSong].mp3 : items[0].mp3}
+      controls={true}
+      playing={playing}
+      onPlay={() => {
+        if (!currentSong) {
+          setCurrentSong(active);
+        }
+        setPlaying(true);
       }}
-      onDuration={(duration) => setSongDuration(duration)}
+      onPause={() => setPlaying(false)}
       config={{ file: { forceAudio: true, attributes: { preload: "none" } } }}
+      style={{
+        zIndex: 1000,
+      }}
+      height={"30px"}
+      width={"400px"}
     />
   );
 };

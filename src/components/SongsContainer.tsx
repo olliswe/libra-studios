@@ -4,7 +4,6 @@ import Carousel from "components/Slidev2";
 import useSliderLogic from "hooks/useSliderLogic";
 import useActiveStore from "hooks/useActiveStore";
 import SliderContent from "components/SliderContent";
-import MusicPlayer from "components/MusicPlayer";
 import Navbar from "components/Navbar";
 import { StringParam, useQueryParam } from "use-query-params";
 import { items } from "helpers/items";
@@ -26,7 +25,6 @@ const CarouselWrapper = styled.div`
 
 const SongsContainer = () => {
   const reset = useActiveStore((state) => state.reset);
-  const playerRef = useRef<any>();
 
   const prev = useRef([0, 1]);
   const index = useRef(0);
@@ -59,9 +57,7 @@ const SongsContainer = () => {
 
   return (
     <Main>
-      <MusicPlayer goToIndex={goToIndex} playerRef={playerRef} />
-
-      <Navbar playerRef={playerRef} />
+      <Navbar goToIndex={goToIndex} />
       <CarouselWrapper>
         <Carousel items={items} bind={bind} width={width} springs={springs}>
           {({ css }: { css: any }, i: number) => (
