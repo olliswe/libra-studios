@@ -103,7 +103,7 @@ const MailWrapper = styled.div`
 const StyledVideo = styled.video`
   position: absolute;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 110%;
   top: 50%;
   left: 52%;
 
@@ -140,16 +140,16 @@ const Home = () => {
             <>
               <AboutDesc>
                 Maquina Studios creates scores for the screen. The studio was
-                founded by Nick & Milton Malmestrom.
+                founded by Nick and Milton Malmestrom.
               </AboutDesc>
               <Caption>REACH OUT AT</Caption>
               <MailWrapper>
                 <Row>
-                  <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
-                </Row>
-                <Row>
                   <Subtitle>{EMAIL_2}</Subtitle>&nbsp;&nbsp;
                   <MailIcon email={EMAIL_2} />
+                </Row>
+                <Row>
+                  <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
                 </Row>
               </MailWrapper>
               <Caption>OR VISIT US AT</Caption>
