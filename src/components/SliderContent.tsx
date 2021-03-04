@@ -63,9 +63,15 @@ const SliderContent = ({ bg, index }: ISliderContent) => {
   const active = useActiveStore((state) => state.active);
   const currentSong = useActiveStore((state) => state.currentSong);
   const setCurrentSong = useActiveStore((state) => state.setCurrentSong);
-  const handlePlay = () => setCurrentSong(active);
-  const handlePause = () => setCurrentSong(null);
-  const isPlaying = active === currentSong;
+  const playing = useActiveStore((state) => state.playing);
+  const setPlaying = useActiveStore((state) => state.setPlaying);
+  const handlePlay = () => {
+    setCurrentSong(active);
+    setPlaying(true);
+  };
+  const handlePause = () => {
+    setPlaying(false);
+  };
 
   const [animProps, setAnim] = useSpring(() => ({
     o: 0,
@@ -82,7 +88,7 @@ const SliderContent = ({ bg, index }: ISliderContent) => {
     <Content>
       <Image style={{ backgroundImage: bg }} />
       <PlayWrapper>
-        {isPlaying ? (
+        {playing && active === currentSong ? (
           <PauseButton onClick={handlePause} />
         ) : (
           <PlayButton onClick={handlePlay} />
