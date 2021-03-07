@@ -6,6 +6,8 @@ export interface ISVG {
   height: string;
   viewBox?: string;
   fill?: string;
+  fillRule?: any;
+  clipPath?: any;
 }
 
 export interface ISVGWrapper {

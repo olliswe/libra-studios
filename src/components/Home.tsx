@@ -5,6 +5,7 @@ import MailIcon, { EMAIL, EMAIL_2 } from "components/elements/MailIcon";
 import Logo from "assets/images/logov2.png";
 import { theme } from "helpers/theme";
 import { StringParam, useQueryParam } from "use-query-params";
+import InstaIcon from "components/elements/InstaIcon";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -150,6 +151,10 @@ const Home = () => {
                 </Row>
                 <Row>
                   <Subtitle>{EMAIL}</Subtitle>&nbsp;&nbsp; <MailIcon />
+                </Row>
+                <Row>
+                  <Subtitle>@MAQUINASTUDIOSOFFICIAL</Subtitle> &nbsp;&nbsp;{" "}
+                  <InstaIcon />
                 </Row>
               </MailWrapper>
               <Caption>OR VISIT US AT</Caption>

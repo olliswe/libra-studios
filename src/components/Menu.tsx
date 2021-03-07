@@ -6,6 +6,7 @@ import ShareIcon from "components/elements/ShareIcon";
 import copy from "copy-to-clipboard";
 import MailIcon from "components/elements/MailIcon";
 import { theme } from "helpers/theme";
+import InstaIcon from "components/elements/InstaIcon";
 
 const ShareCopy = styled.span<{ showCopy: boolean }>`
   font-family: ${({ theme }) => theme.fonts.ProximaRegular};
@@ -65,6 +66,7 @@ const Menu = ({ goToIndex }: { goToIndex: (input: number) => void }) => {
       <ShareCopy showCopy={showCopy}>Link copied to clipboard</ShareCopy>
       <ShareIcon onClick={handleShare} />
       <MailIcon />
+      <InstaIcon />
       {items.map((item, i) => (
         <CurrentSong
           key={i}
